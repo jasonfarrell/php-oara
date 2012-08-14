@@ -54,11 +54,11 @@ class Oara_Network_LinkShare extends Oara_Network{
 		$loginUrl = 'https://cli.linksynergy.com/cli/common/authenticateUser.php';
 
 		$valuesLogin = array(new Oara_Curl_Parameter('front_url', ''),
-		new Oara_Curl_Parameter('postLoginDestination', ''),
-		new Oara_Curl_Parameter('loginUsername', $user),
-		new Oara_Curl_Parameter('loginPassword', $password),
-		new Oara_Curl_Parameter('x', '66'),
-		new Oara_Curl_Parameter('y', '11')
+			new Oara_Curl_Parameter('postLoginDestination', ''),
+			new Oara_Curl_Parameter('loginUsername', $user),
+			new Oara_Curl_Parameter('loginPassword', $password),
+			new Oara_Curl_Parameter('x', '66'),
+			new Oara_Curl_Parameter('y', '11')
 		);
 		//Login to the Linkshare Application
 		$this->_client = new Oara_Curl_Access($loginUrl, $valuesLogin, $credentials);
@@ -258,48 +258,48 @@ class Oara_Network_LinkShare extends Oara_Network{
 			//foreach ($merchantList as $mid){
 
 
-					echo "getting Transactions for site ".$site->id."\n\n";
+			echo "getting Transactions for site ".$site->id."\n\n";
 
-					
-					$url = "https://reportws.linksynergy.com/downloadreport.php?bdate=".$dStartDate->toString("yyyyMMdd")."&edate=".$dEndDate->toString("yyyyMMdd").
-																		"&token=".$site->secureToken."&nid=".$this->_nid."&reportid=12";
-					$result = file_get_contents($url);
-					if (preg_match("/You cannot request/", $result)){
-						throw new Exception("Reached the limit");
+
+			$url = "https://reportws.linksynergy.com/downloadreport.php?bdate=".$dStartDate->toString("yyyyMMdd")."&edate=".$dEndDate->toString("yyyyMMdd").
+				"&token=".$site->secureToken."&nid=".$this->_nid."&reportid=12";
+			$result = file_get_contents($url);
+			if (preg_match("/You cannot request/", $result)){
+				throw new Exception("Reached the limit");
+			}
+			$exportData = str_getcsv($result,"\n");
+			$num = count($exportData);
+			for ($j = 1; $j < $num; $j++) {
+				$transactionData = str_getcsv($exportData[$j],",");
+
+
+				if (in_array((int)$transactionData[1],$merchantList)){
+					$transaction = Array();
+					$transaction['merchantId'] = (int)$transactionData[1];
+					$transactionDate = new Zend_Date($transactionData[10]." ".$transactionData[11], "MM/dd/yyyy HH:mm:ss");
+					$transaction['date'] = $transactionDate->toString("yyyy-MM-dd HH:mm:ss");
+
+					if ($transactionData[0] != '<none>'){
+						$transaction['custom_id'] = $transactionData[0];
 					}
-					$exportData = str_getcsv($result,"\n");
-					$num = count($exportData);
-					for ($j = 1; $j < $num; $j++) {
-						$transactionData = str_getcsv($exportData[$j],",");
-						
-						
-						if (in_array((int)$transactionData[1],$merchantList)){
-							$transaction = Array();
-							$transaction['merchantId'] = (int)$transactionData[1];
-							$transactionDate = new Zend_Date($transactionData[10]." ".$transactionData[11], "MM/dd/yyyy HH:mm:ss");
-							$transaction['date'] = $transactionDate->toString("yyyy-MM-dd HH:mm:ss");
-	
-							if ($transactionData[0] != '<none>'){
-								$transaction['custom_id'] = $transactionData[0];
-							}
-							$transaction['unique_id'] = $transactionData[3];
-	
-							$sales = $filter->filter($transactionData[7]);
-	
-							if ($sales != 0){
-								$transaction['status'] = Oara_Utilities::STATUS_CONFIRMED;
-							} else if ($sales == 0){
-								$transaction['status'] = Oara_Utilities::STATUS_PENDING;
-							}
-	
-							$transaction['amount'] = $filter->filter($transactionData[7]);
-	
-							$transaction['commission'] = $filter->filter($transactionData[9]);
-	
-							$totalTransactions[] = $transaction;
-							
-						}
+					$transaction['unique_id'] = $transactionData[3];
+
+					$sales = $filter->filter($transactionData[7]);
+
+					if ($sales != 0){
+						$transaction['status'] = Oara_Utilities::STATUS_CONFIRMED;
+					} else if ($sales == 0){
+						$transaction['status'] = Oara_Utilities::STATUS_PENDING;
 					}
+
+					$transaction['amount'] = $filter->filter($transactionData[7]);
+
+					$transaction['commission'] = $filter->filter($transactionData[9]);
+
+					$totalTransactions[] = $transaction;
+
+				}
+			}
 			//}
 		}
 
@@ -313,43 +313,43 @@ class Oara_Network_LinkShare extends Oara_Network{
 		$overviewArray = Array();
 		$transactionArray = Oara_Utilities::transactionMapPerDay($transactionList);
 		foreach ($transactionArray as $merchantId => $merchantTransaction){
-        	foreach ($merchantTransaction as $date => $transactionList){
-        		
-        		$overview = Array();   
-                $overview['merchantId'] = $merchantId;
-                $overviewDate = new Zend_Date($date, "yyyy-MM-dd");
-                $overview['date'] = $overviewDate->toString("yyyy-MM-dd HH:mm:ss");
-                unset($overviewDate);
-                $overview['click_number'] = 0;
-                $overview['impression_number'] = 0;
-                $overview['transaction_number'] = 0;
-                $overview['transaction_confirmed_value'] = 0;
-                $overview['transaction_confirmed_commission']= 0;
-                $overview['transaction_pending_value']= 0;
-                $overview['transaction_pending_commission']= 0;
-                $overview['transaction_declined_value']= 0;
-                $overview['transaction_declined_commission']= 0;
-                $overview['transaction_paid_value']= 0;
-                $overview['transaction_paid_commission']= 0;
-                foreach ($transactionList as $transaction){
-                	$overview['transaction_number'] ++;
-                    if ($transaction['status'] == Oara_Utilities::STATUS_CONFIRMED){
-                    	$overview['transaction_confirmed_value'] += $transaction['amount'];
-                    	$overview['transaction_confirmed_commission'] += $transaction['commission'];
-                    } else if ($transaction['status'] == Oara_Utilities::STATUS_PENDING){
-                    	$overview['transaction_pending_value'] += $transaction['amount'];
-                    	$overview['transaction_pending_commission'] += $transaction['commission'];
-                    } else if ($transaction['status'] == Oara_Utilities::STATUS_DECLINED){
-                    	$overview['transaction_declined_value'] += $transaction['amount'];
-                    	$overview['transaction_declined_commission'] += $transaction['commission'];
-                	} else if ($transaction['status'] == Oara_Utilities::STATUS_PAID){
-	                	$overview['transaction_paid_value'] += $transaction['amount'];
-	                	$overview['transaction_paid_commission'] += $transaction['commission'];
-            		}
-        		}
-                $overviewArray[] = $overview;
-        	}
-        }
+			foreach ($merchantTransaction as $date => $transactionList){
+
+				$overview = Array();   
+				$overview['merchantId'] = $merchantId;
+				$overviewDate = new Zend_Date($date, "yyyy-MM-dd");
+				$overview['date'] = $overviewDate->toString("yyyy-MM-dd HH:mm:ss");
+				unset($overviewDate);
+				$overview['click_number'] = 0;
+				$overview['impression_number'] = 0;
+				$overview['transaction_number'] = 0;
+				$overview['transaction_confirmed_value'] = 0;
+				$overview['transaction_confirmed_commission']= 0;
+				$overview['transaction_pending_value']= 0;
+				$overview['transaction_pending_commission']= 0;
+				$overview['transaction_declined_value']= 0;
+				$overview['transaction_declined_commission']= 0;
+				$overview['transaction_paid_value']= 0;
+				$overview['transaction_paid_commission']= 0;
+				foreach ($transactionList as $transaction){
+					$overview['transaction_number'] ++;
+					if ($transaction['status'] == Oara_Utilities::STATUS_CONFIRMED){
+						$overview['transaction_confirmed_value'] += $transaction['amount'];
+						$overview['transaction_confirmed_commission'] += $transaction['commission'];
+					} else if ($transaction['status'] == Oara_Utilities::STATUS_PENDING){
+						$overview['transaction_pending_value'] += $transaction['amount'];
+						$overview['transaction_pending_commission'] += $transaction['commission'];
+					} else if ($transaction['status'] == Oara_Utilities::STATUS_DECLINED){
+						$overview['transaction_declined_value'] += $transaction['amount'];
+						$overview['transaction_declined_commission'] += $transaction['commission'];
+					} else if ($transaction['status'] == Oara_Utilities::STATUS_PAID){
+						$overview['transaction_paid_value'] += $transaction['amount'];
+						$overview['transaction_paid_commission'] += $transaction['commission'];
+					}
+				}
+				$overviewArray[] = $overview;
+			}
+		}
 
 		return $overviewArray;
 	}
@@ -375,12 +375,12 @@ class Oara_Network_LinkShare extends Oara_Network{
 				}
 
 				echo "getting Payment for Site ".$site->id." and year ".$bdate->toString("yyyy")." \n\n";
-				
-				
+
+
 				$url = "https://reportws.linksynergy.com/downloadreport.php?bdate=".$bdate->toString("yyyyMMdd")."&edate=".$edate->toString("yyyyMMdd").
-																		"&token=".$site->secureToken."&nid=".$this->_nid."&reportid=1";
+					"&token=".$site->secureToken."&nid=".$this->_nid."&reportid=1";
 				if (preg_match("/You cannot request/", $result)){
-						throw new Exception("Reached the limit");
+					throw new Exception("Reached the limit");
 				}
 				$result = file_get_contents($url);
 
@@ -399,32 +399,32 @@ class Oara_Network_LinkShare extends Oara_Network{
 				}
 			}
 		}
-			
+
 		return $paymentHistory;
 	}
-	
- 	/**
-     * 
-     * It returns the transactions for a payment
-     * @param int $paymentId
-     */
-    public function paymentTransactions($paymentId, $merchantList, $startDate){
-    	$transactionList = array();
-    	foreach ($this->_siteList as $site){
+
+	/**
+	 * 
+	 * It returns the transactions for a payment
+	 * @param int $paymentId
+	 */
+	public function paymentTransactions($paymentId, $merchantList, $startDate){
+		$transactionList = array();
+		foreach ($this->_siteList as $site){
 			$url = "https://reportws.linksynergy.com/downloadreport.php?payid=$paymentId&token=".$site->secureToken."&reportid=3";
 			$result = file_get_contents($url);
-    		if (preg_match("/You cannot request/", $result)){
-					throw new Exception("Reached the limit");
+			if (preg_match("/You cannot request/", $result)){
+				throw new Exception("Reached the limit");
 			}
-	    	$paymentLines = str_getcsv($result, "\n");
+			$paymentLines = str_getcsv($result, "\n");
 			$number = count($paymentLines);
 			for ($j = 1; $j < $number ; $j++){
 				$paymentData = str_getcsv($paymentLines[$j], ",");
 				$transactionList[] = $paymentData[4];
 			}
-    	}
-		
-    	return $transactionList;
-    }
+		}
+
+		return $transactionList;
+	}
 
 }

@@ -49,7 +49,7 @@ class Oara_Curl_Access{
 		$isTD = $credentials['networkName'] == "TradeDoubler";
 		//$isAW = $credentials['networkName'] == "AffiliateWindow";
 		$dir = realpath(dirname(__FILE__)).'/../data/curl/'.$credentials['cookiesDir'].'/'.$credentials['cookiesSubDir'].'/';
-			
+
 		if (!Oara_Utilities::mkdir_recursive($dir,0777)){
 			throw new Exception ('Problem creating folder in Access');
 		}
@@ -72,16 +72,16 @@ class Oara_Curl_Access{
 		$cookies = $dir.$cookieName.'_cookies.txt';
 
 		$this->_options = array(
-		CURLOPT_USERAGENT => "Mozilla/5.0 (X11; Linux i686; rv:7.0.1) Gecko/20100101 Firefox/7.0.1",
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_FAILONERROR => true,
-		CURLOPT_COOKIEJAR  => $cookies,
-		CURLOPT_COOKIEFILE => $cookies,
-		CURLOPT_FAILONERROR => true,
-		CURLOPT_HTTPAUTH => CURLAUTH_ANY,
-		CURLOPT_AUTOREFERER => true,
-		CURLOPT_SSL_VERIFYPEER =>false,
-		//CURLOPT_VERBOSE => true,
+			CURLOPT_USERAGENT => "Mozilla/5.0 (X11; Linux i686; rv:7.0.1) Gecko/20100101 Firefox/7.0.1",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_FAILONERROR => true,
+			CURLOPT_COOKIEJAR  => $cookies,
+			CURLOPT_COOKIEFILE => $cookies,
+			CURLOPT_FAILONERROR => true,
+			CURLOPT_HTTPAUTH => CURLAUTH_ANY,
+			CURLOPT_AUTOREFERER => true,
+			CURLOPT_SSL_VERIFYPEER =>false,
+			//CURLOPT_VERBOSE => true,
 		);
 
 		//Init curl

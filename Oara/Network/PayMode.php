@@ -25,14 +25,14 @@ class Oara_Network_PayMode extends Oara_Network{
 	 * @var unknown_type
 	 */
 	private $_exportPaymentTransactionParameters = null;
-	
-	
+
+
 	/**
 	 * Client
 	 * @var unknown_type
 	 */
 	private $_client = null;
-	
+
 	/**
 	 * AgentNumber
 	 * @var unknown_type
@@ -48,9 +48,9 @@ class Oara_Network_PayMode extends Oara_Network{
 		$user = $credentials['user'];
 		$password = $credentials['password'];
 		$valuesLogin = array(
-		new Oara_Curl_Parameter('username', $user),
-		new Oara_Curl_Parameter('password', $password),
-		new Oara_Curl_Parameter('Enter', 'Enter')
+			new Oara_Curl_Parameter('username', $user),
+			new Oara_Curl_Parameter('password', $password),
+			new Oara_Curl_Parameter('Enter', 'Enter')
 		);
 
 		$loginUrl = 'https://secure.paymode.com/paymode/do-login.jsp?';
@@ -58,64 +58,64 @@ class Oara_Network_PayMode extends Oara_Network{
 
 
 		$this->_exportTransactionParameters = array(new Oara_Curl_Parameter('isDetailReport', 'true'),
-		new Oara_Curl_Parameter('method', 'ALL'),
-		new Oara_Curl_Parameter('currency', 'ALL_CURRENCIES'),
-		new Oara_Curl_Parameter('amount', ''),
-		new Oara_Curl_Parameter('disburserName', ''),
-		new Oara_Curl_Parameter('remitType', 'CAR'),
-		new Oara_Curl_Parameter('CAR_customerName', ''),
-		new Oara_Curl_Parameter('CAR_confirmationNumber', ''),
-		new Oara_Curl_Parameter('CAR_franchiseNumber', ''),
-		new Oara_Curl_Parameter('CAR_remitStartDate', ''),
-		new Oara_Curl_Parameter('CAR_remitEndDate', ''),
-		new Oara_Curl_Parameter('CAR_rentalLocation', ''),
-		new Oara_Curl_Parameter('CAR_agreementNumber', ''),
-		new Oara_Curl_Parameter('CAR_commissionAmount', ''),
-		new Oara_Curl_Parameter('CAR_sortBy', 'CUSTOMER_NAME'),
-		new Oara_Curl_Parameter('submit1', 'Submit'),
-		new Oara_Curl_Parameter('AIR_customerName', ''),
-		new Oara_Curl_Parameter('AIR_confirmationNumber', ''),
-		new Oara_Curl_Parameter('AIR_agreementNumber', ''),
-		new Oara_Curl_Parameter('AIR_issueDate', ''),
-		new Oara_Curl_Parameter('AIR_sortBy', 'CUSTOMER_NAME'),
+			new Oara_Curl_Parameter('method', 'ALL'),
+			new Oara_Curl_Parameter('currency', 'ALL_CURRENCIES'),
+			new Oara_Curl_Parameter('amount', ''),
+			new Oara_Curl_Parameter('disburserName', ''),
+			new Oara_Curl_Parameter('remitType', 'CAR'),
+			new Oara_Curl_Parameter('CAR_customerName', ''),
+			new Oara_Curl_Parameter('CAR_confirmationNumber', ''),
+			new Oara_Curl_Parameter('CAR_franchiseNumber', ''),
+			new Oara_Curl_Parameter('CAR_remitStartDate', ''),
+			new Oara_Curl_Parameter('CAR_remitEndDate', ''),
+			new Oara_Curl_Parameter('CAR_rentalLocation', ''),
+			new Oara_Curl_Parameter('CAR_agreementNumber', ''),
+			new Oara_Curl_Parameter('CAR_commissionAmount', ''),
+			new Oara_Curl_Parameter('CAR_sortBy', 'CUSTOMER_NAME'),
+			new Oara_Curl_Parameter('submit1', 'Submit'),
+			new Oara_Curl_Parameter('AIR_customerName', ''),
+			new Oara_Curl_Parameter('AIR_confirmationNumber', ''),
+			new Oara_Curl_Parameter('AIR_agreementNumber', ''),
+			new Oara_Curl_Parameter('AIR_issueDate', ''),
+			new Oara_Curl_Parameter('AIR_sortBy', 'CUSTOMER_NAME'),
 
-		new Oara_Curl_Parameter('CRUISE_vesselName', ''),
-		new Oara_Curl_Parameter('CRUISE_customerName', ''),
-		new Oara_Curl_Parameter('CRUISE_confirmationNumber', ''),
-		new Oara_Curl_Parameter('CRUISE_remitStartDate', ''),
-		new Oara_Curl_Parameter('CRUISE_duration', ''),
-		new Oara_Curl_Parameter('CRUISE_commissionAmount', ''),
-		new Oara_Curl_Parameter('CRUISE_sortBy', 'FACILITY_NAME'),
+			new Oara_Curl_Parameter('CRUISE_vesselName', ''),
+			new Oara_Curl_Parameter('CRUISE_customerName', ''),
+			new Oara_Curl_Parameter('CRUISE_confirmationNumber', ''),
+			new Oara_Curl_Parameter('CRUISE_remitStartDate', ''),
+			new Oara_Curl_Parameter('CRUISE_duration', ''),
+			new Oara_Curl_Parameter('CRUISE_commissionAmount', ''),
+			new Oara_Curl_Parameter('CRUISE_sortBy', 'FACILITY_NAME'),
 
-		new Oara_Curl_Parameter('HOTEL_hotelName', ''),
-		new Oara_Curl_Parameter('HOTEL_customerName', ''),
-		new Oara_Curl_Parameter('HOTEL_confirmationNumber', ''),
-		new Oara_Curl_Parameter('HOTEL_remitStartDate', ''),
-		new Oara_Curl_Parameter('HOTEL_duration', ''),
-		new Oara_Curl_Parameter('HOTEL_commissionAmount', ''),
-		new Oara_Curl_Parameter('HOTEL_sortBy', 'FACILITY_NAME')
+			new Oara_Curl_Parameter('HOTEL_hotelName', ''),
+			new Oara_Curl_Parameter('HOTEL_customerName', ''),
+			new Oara_Curl_Parameter('HOTEL_confirmationNumber', ''),
+			new Oara_Curl_Parameter('HOTEL_remitStartDate', ''),
+			new Oara_Curl_Parameter('HOTEL_duration', ''),
+			new Oara_Curl_Parameter('HOTEL_commissionAmount', ''),
+			new Oara_Curl_Parameter('HOTEL_sortBy', 'FACILITY_NAME')
 		);
 
 
-			
+
 		$this->_exportPaymentParameters = array(
-		new Oara_Curl_Parameter('isDetailReport', 'false'),
-		new Oara_Curl_Parameter('method', 'ALL'),
-		new Oara_Curl_Parameter('currency', 'ALL_CURRENCIES'),
-		new Oara_Curl_Parameter('amount', ''),
-		new Oara_Curl_Parameter('disburserName', ''),
-		new Oara_Curl_Parameter('submit1', 'Submit')
+			new Oara_Curl_Parameter('isDetailReport', 'false'),
+			new Oara_Curl_Parameter('method', 'ALL'),
+			new Oara_Curl_Parameter('currency', 'ALL_CURRENCIES'),
+			new Oara_Curl_Parameter('amount', ''),
+			new Oara_Curl_Parameter('disburserName', ''),
+			new Oara_Curl_Parameter('submit1', 'Submit')
 		);
-			
+
 		$this->_exportPaymentTransactionParameters = array(
-		new Oara_Curl_Parameter('fromNonMigrated', 'false'),
-		new Oara_Curl_Parameter('returnPage', ''),
-		new Oara_Curl_Parameter('mode', ''),
-		new Oara_Curl_Parameter('siteid', ''),
-		new Oara_Curl_Parameter('ssid', '')
+			new Oara_Curl_Parameter('fromNonMigrated', 'false'),
+			new Oara_Curl_Parameter('returnPage', ''),
+			new Oara_Curl_Parameter('mode', ''),
+			new Oara_Curl_Parameter('siteid', ''),
+			new Oara_Curl_Parameter('ssid', '')
 		);
-		
-		
+
+
 	}
 	/**
 	 * Check the connection
@@ -128,7 +128,7 @@ class Oara_Network_PayMode extends Oara_Network{
 		$exportReport = $this->_client->get($urls);
 
 		if (preg_match("/paymode\/logout\.jsp/", $exportReport[0], $matches)){
-				
+
 			$urls = array();
 			$urls[] = new Oara_Curl_Request('https://secure.paymode.com/paymode/reports-pre_commission_history.jsp?', array());
 			$exportReport = $this->_client->get($urls);
@@ -138,7 +138,7 @@ class Oara_Network_PayMode extends Oara_Network{
 			foreach ($results as $result){
 				$this->_agentNumber = $result->getAttribute("id");
 			}
-				
+
 			$connection = true;
 		}
 		return $connection;
@@ -208,7 +208,7 @@ class Oara_Network_PayMode extends Oara_Network{
 
 			}
 		}
-			
+
 		return $totalTransactions;
 	}
 
@@ -330,22 +330,22 @@ class Oara_Network_PayMode extends Oara_Network{
 		}
 		return $paymentHistory;
 	}
-	
+
 	/**
 	 *  It returns the transactions for a payment
 	 * @see Oara_Network::paymentTransactions()
 	 */
-    public function paymentTransactions($paymentId, $merchantList, $startDate){
-    	
-   		$paymentTransactionList = array();
+	public function paymentTransactions($paymentId, $merchantList, $startDate){
+
+		$paymentTransactionList = array();
 		$urls = array();
-		
+
 		$valuesFromExport = $this->_exportPaymentTransactionParameters;
 		$valuesFromExport[] = new Oara_Curl_Parameter('cpid', $paymentId);
-        $urls[] = new Oara_Curl_Request('https://secure.paymode.com/paymode/post-coll_comm_hist_detail.jsp?', $valuesFromExport);
-    	$exportReport = $this->_client->get($urls);
-    	
-    	$urls = array();
+		$urls[] = new Oara_Curl_Request('https://secure.paymode.com/paymode/post-coll_comm_hist_detail.jsp?', $valuesFromExport);
+		$exportReport = $this->_client->get($urls);
+
+		$urls = array();
 		$urls[] = new Oara_Curl_Request('https://secure.paymode.com/paymode/tewf/navGenericReport.jsp?presentation=excel', array());
 		$exportReport = $this->_client->get($urls);
 
@@ -369,10 +369,10 @@ class Oara_Network_PayMode extends Oara_Network{
 
 			}
 		}
-    	
-    	
-    	return $paymentTransactionList;
-    }
+
+
+		return $paymentTransactionList;
+	}
 
 
 	/**

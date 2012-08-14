@@ -10,102 +10,102 @@
  */
 class Oara_Network_Publicidees extends Oara_Network{
 	/**
-     * Client 
-     * @var unknown_type
-     */
+	 * Client 
+	 * @var unknown_type
+	 */
 	private $_client = null;
-    /**
-     * Constructor and Login
-     * @param $credentials
-     * @return Oara_Network_Effiliation
-     */
-    public function __construct($credentials)
-    {
-        
-        $user = $credentials['user'];
+	/**
+	 * Constructor and Login
+	 * @param $credentials
+	 * @return Oara_Network_Effiliation
+	 */
+	public function __construct($credentials)
+	{
+
+		$user = $credentials['user'];
 		$password = $credentials['password'];
 		$loginUrl = 'http://affilie.publicidees.com/entree_affilies.php';
-		
-		
+
+
 		//getting the hidden value
 		$dom = new Zend_Dom_Query(file_get_contents("http://www.publicidees.com/"));
-        $results = $dom->query("input[name='h']");
-        
-        $hValue = null;
-        foreach ($results as $result){
-        	$hValue = $result->getAttribute('value');
-        }
-		
+		$results = $dom->query("input[name='h']");
+
+		$hValue = null;
+		foreach ($results as $result){
+			$hValue = $result->getAttribute('value');
+		}
+
 		$valuesLogin = array(new Oara_Curl_Parameter('login', $user),
-							 new Oara_Curl_Parameter('pass', $password),
-							 new Oara_Curl_Parameter('submit', 'Ok'),
-							 new Oara_Curl_Parameter('h', $hValue)
-							);
+			new Oara_Curl_Parameter('pass', $password),
+			new Oara_Curl_Parameter('submit', 'Ok'),
+			new Oara_Curl_Parameter('h', $hValue)
+		);
 		$this->_client = new Oara_Curl_Access($loginUrl, $valuesLogin, $credentials);
 
-    }
+	}
 	/**
 	 * Check the connection
 	 */
 	public function checkConnection(){
 		$connection = false;
-		
+
 		$urls = array();
-        $urls[] = new Oara_Curl_Request('http://affilie.publicidees.com/', array());
+		$urls[] = new Oara_Curl_Request('http://affilie.publicidees.com/', array());
 		$exportReport = $this->_client->get($urls);
-		
+
 		if (preg_match("/deconnexion\.php/", $exportReport[0], $matches)){
 			$connection = true;
 		}
 		return $connection;
 	}
 
-    /**
-     * (non-PHPdoc)
-     * @see library/Oara/Network/Oara_Network_Interface#getMerchantList()
-     */
-    public function getMerchantList(){
-    	$merchants = array();
-    	
-    	$valuesFromExport = array();
-		$valuesFromExport[] = new Oara_Curl_Parameter('action', "myprograms");
-    	
-    	$urls = array();
-        $urls[] = new Oara_Curl_Request('http://affilie.publicidees.com/index.php?', $valuesFromExport);
-		$exportReport = $this->_client->get($urls);
-		
-		
-    	$dom = new Zend_Dom_Query($exportReport[0]);
-        $results = $dom->query(".listPresentationFluxAff a[target='_blank']");
-        
-        $href = null;
-        foreach ($results as $result){
-        	$href = $result->getAttribute('href');
-        }
-    	
-        $content = file_get_contents($href);
-		$xml = simplexml_load_string($content, null, LIBXML_NOERROR | LIBXML_NOWARNING);
-        foreach ($xml->program as $merchant){
-        		$obj = array();
-	            $obj['cid'] = (string)$merchant->attributes()->id;
-	            $obj['name'] = (string)$merchant->program_name;
-	            $obj['url'] = (string)$merchant->program_url;
-	            $merchants[] = $obj;
-		}
-        return $merchants;
-    }
+	/**
+	 * (non-PHPdoc)
+	 * @see library/Oara/Network/Oara_Network_Interface#getMerchantList()
+	 */
+	public function getMerchantList(){
+		$merchants = array();
 
-    /**
-     * (non-PHPdoc)
-     * @see library/Oara/Network/Oara_Network_Interface#getTransactionList($aMerchantIds, $dStartDate, $dEndDate)
-     */
-    public function getTransactionList($merchantList = null, Zend_Date $dStartDate = null, Zend_Date $dEndDate = null, $merchantMap = null){
-    	$totalTransactions = array();
-    	$filter = new Zend_Filter_LocalizedToNormalized(array('precision' => 2 ,'locale' => 'fr'));
-    	$dateArray = Oara_Utilities::daysOfDifference($dStartDate, $dEndDate);
-    	$dateArraySize = sizeof($dateArray);
-    	
-    	foreach ($merchantList as $merchantId){
+		$valuesFromExport = array();
+		$valuesFromExport[] = new Oara_Curl_Parameter('action', "myprograms");
+
+		$urls = array();
+		$urls[] = new Oara_Curl_Request('http://affilie.publicidees.com/index.php?', $valuesFromExport);
+		$exportReport = $this->_client->get($urls);
+
+
+		$dom = new Zend_Dom_Query($exportReport[0]);
+		$results = $dom->query(".listPresentationFluxAff a[target='_blank']");
+
+		$href = null;
+		foreach ($results as $result){
+			$href = $result->getAttribute('href');
+		}
+
+		$content = file_get_contents($href);
+		$xml = simplexml_load_string($content, null, LIBXML_NOERROR | LIBXML_NOWARNING);
+		foreach ($xml->program as $merchant){
+			$obj = array();
+			$obj['cid'] = (string)$merchant->attributes()->id;
+			$obj['name'] = (string)$merchant->program_name;
+			$obj['url'] = (string)$merchant->program_url;
+			$merchants[] = $obj;
+		}
+		return $merchants;
+	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see library/Oara/Network/Oara_Network_Interface#getTransactionList($aMerchantIds, $dStartDate, $dEndDate)
+	 */
+	public function getTransactionList($merchantList = null, Zend_Date $dStartDate = null, Zend_Date $dEndDate = null, $merchantMap = null){
+		$totalTransactions = array();
+		$filter = new Zend_Filter_LocalizedToNormalized(array('precision' => 2 ,'locale' => 'fr'));
+		$dateArray = Oara_Utilities::daysOfDifference($dStartDate, $dEndDate);
+		$dateArraySize = sizeof($dateArray);
+
+		foreach ($merchantList as $merchantId){
 			$urls = array();
 			for ($i = 0; $i < $dateArraySize; $i++){
 				$valuesFromExport = array();
@@ -117,78 +117,78 @@ class Oara_Network_Publicidees extends Oara_Network{
 				$valuesFromExport[] = new Oara_Curl_Parameter('expAct', "1");
 				$valuesFromExport[] = new Oara_Curl_Parameter('tabid', "0");
 				$valuesFromExport[] = new Oara_Curl_Parameter('Submit', "Voir");
-				
-        		$urls[] = new Oara_Curl_Request('http://affilie.publicidees.com/index.php?', $valuesFromExport);
+
+				$urls[] = new Oara_Curl_Request('http://affilie.publicidees.com/index.php?', $valuesFromExport);
 			}
 			$exportReport = $this->_client->get($urls);
 			$numExport = count($exportReport);
 			for($i = 0; $i < $numExport;$i++){
 				$exportData = str_getcsv(utf8_decode($exportReport[$i]),"\n");
-		    	$num = count($exportData);
-		    	
-		    	$headerArray = str_getcsv($exportData[0],";");
-		    	$headerMap = array();
-		    	if (count($headerArray) > 1){
-			    	
-			    	 for ($j = 0; $j < count($headerArray); $j++) {
-			    	 	if ($headerArray[$j] == "" && $headerArray[$j - 1] == "Ventes"){
-			    	 		$headerMap["pendingVentes"] = $j;
-			    	 	} else if ($headerArray[$j] == "" && $headerArray[$j - 1] == "CA"){
-			    	 		$headerMap["pendingCA"] = $j;
-			    	 	} else {
-			    	 		$headerMap[$headerArray[$j]] = $j;
-			    	 	}
-			    	}
-		    	}
-		    	
-		    	
-		        for ($j = 1; $j < $num; $j++) {
-		        	
-		            $transactionExportArray = str_getcsv($exportData[$j],";");
-		           	if (isset($headerMap["Ventes"]) && isset($headerMap["pendingVentes"])) {
-			           	$confirmedTransactions = (int)$transactionExportArray[$headerMap["Ventes"]];
-			            $pendingTransactions = (int)$transactionExportArray[$headerMap["pendingVentes"]];
-			            
-			            for ($z = 0; $z < $confirmedTransactions; $z++){
-			            	$transaction = Array();
-				            $transaction['merchantId'] = $merchantId;
-				            $parameters = $urls[$i]->getParameters();
-				            $transactionDate = new Zend_Date($parameters[2]->getValue(), "dd/MM/yyyy"); 
-				            $transaction['date'] = $transactionDate->toString("yyyy-MM-dd HH:mm:ss");
-							$transaction['amount'] = ((double)$filter->filter(substr($transactionExportArray[$headerMap["CA"]], 0, -2)) /  $confirmedTransactions);
-				            $transaction['commission'] = ((double)$filter->filter(substr($transactionExportArray[$headerMap["CA"]], 0, -2)) /  $confirmedTransactions);
-			            	$transaction['status'] = Oara_Utilities::STATUS_CONFIRMED;
-			            	$totalTransactions[] = $transaction;
-			            }
-			            
-			        	for ($z = 0; $z < $pendingTransactions; $z++){
-			            	$transaction = Array();
-				            $transaction['merchantId'] = $merchantId;
-				            $transaction['date'] = $dateArray[$i]->toString("yyyy-MM-dd HH:mm:ss");
-							$transaction['amount'] = ((double)$filter->filter(substr($transactionExportArray[$headerMap["pendingCA"]], 0, -2)) /  $pendingTransactions);
-				            $transaction['commission'] = ((double)$filter->filter(substr($transactionExportArray[$headerMap["pendingCA"]], 0, -2)) /  $pendingTransactions);
-			            	$transaction['status'] = Oara_Utilities::STATUS_PENDING;
-			            	$totalTransactions[] = $transaction;
-			            }
-		           		
-		           	}
-	            }
-			}
-    	}
-    	
-        return $totalTransactions;
-    }
+				$num = count($exportData);
 
-    /**
-     * (non-PHPdoc)
-     * @see library/Oara/Network/Oara_Network_Interface#getOverviewList($aMerchantIds, $dStartDate, $dEndDate)
-     */
-    public function getOverviewList($transactionList = null, $merchantList = null, Zend_Date $dStartDate = null, Zend_Date $dEndDate = null, $merchantMap = null){
-        $overviewArray = array();
-        
-    	$transactionArray = Oara_Utilities::transactionMapPerDay($transactionList);
-			
-    	foreach ($transactionArray as $merchantId => $merchantTransaction){
+				$headerArray = str_getcsv($exportData[0],";");
+				$headerMap = array();
+				if (count($headerArray) > 1){
+
+					for ($j = 0; $j < count($headerArray); $j++) {
+						if ($headerArray[$j] == "" && $headerArray[$j - 1] == "Ventes"){
+							$headerMap["pendingVentes"] = $j;
+						} else if ($headerArray[$j] == "" && $headerArray[$j - 1] == "CA"){
+							$headerMap["pendingCA"] = $j;
+						} else {
+							$headerMap[$headerArray[$j]] = $j;
+						}
+					}
+				}
+
+
+				for ($j = 1; $j < $num; $j++) {
+
+					$transactionExportArray = str_getcsv($exportData[$j],";");
+					if (isset($headerMap["Ventes"]) && isset($headerMap["pendingVentes"])) {
+						$confirmedTransactions = (int)$transactionExportArray[$headerMap["Ventes"]];
+						$pendingTransactions = (int)$transactionExportArray[$headerMap["pendingVentes"]];
+
+						for ($z = 0; $z < $confirmedTransactions; $z++){
+							$transaction = Array();
+							$transaction['merchantId'] = $merchantId;
+							$parameters = $urls[$i]->getParameters();
+							$transactionDate = new Zend_Date($parameters[2]->getValue(), "dd/MM/yyyy"); 
+							$transaction['date'] = $transactionDate->toString("yyyy-MM-dd HH:mm:ss");
+							$transaction['amount'] = ((double)$filter->filter(substr($transactionExportArray[$headerMap["CA"]], 0, -2)) /  $confirmedTransactions);
+							$transaction['commission'] = ((double)$filter->filter(substr($transactionExportArray[$headerMap["CA"]], 0, -2)) /  $confirmedTransactions);
+							$transaction['status'] = Oara_Utilities::STATUS_CONFIRMED;
+							$totalTransactions[] = $transaction;
+						}
+
+						for ($z = 0; $z < $pendingTransactions; $z++){
+							$transaction = Array();
+							$transaction['merchantId'] = $merchantId;
+							$transaction['date'] = $dateArray[$i]->toString("yyyy-MM-dd HH:mm:ss");
+							$transaction['amount'] = ((double)$filter->filter(substr($transactionExportArray[$headerMap["pendingCA"]], 0, -2)) /  $pendingTransactions);
+							$transaction['commission'] = ((double)$filter->filter(substr($transactionExportArray[$headerMap["pendingCA"]], 0, -2)) /  $pendingTransactions);
+							$transaction['status'] = Oara_Utilities::STATUS_PENDING;
+							$totalTransactions[] = $transaction;
+						}
+
+					}
+				}
+			}
+		}
+
+		return $totalTransactions;
+	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see library/Oara/Network/Oara_Network_Interface#getOverviewList($aMerchantIds, $dStartDate, $dEndDate)
+	 */
+	public function getOverviewList($transactionList = null, $merchantList = null, Zend_Date $dStartDate = null, Zend_Date $dEndDate = null, $merchantMap = null){
+		$overviewArray = array();
+
+		$transactionArray = Oara_Utilities::transactionMapPerDay($transactionList);
+
+		foreach ($transactionArray as $merchantId => $merchantTransaction){
 			foreach ($merchantTransaction as $date => $transactionList){
 
 				$overview = Array();
@@ -226,6 +226,6 @@ class Oara_Network_Publicidees extends Oara_Network{
 				$overviewArray[] = $overview;
 			}
 		}
-        return $overviewArray;
-    }
+		return $overviewArray;
+	}
 }

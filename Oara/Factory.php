@@ -14,18 +14,18 @@ class Oara_Factory{
 	 * @param $affiliateNetwork
 	 * @return Oara_Factory_Interface
 	 */
-    public static function createInstance($credentials) {
+	public static function createInstance($credentials) {
 
-    	$affiliate = null;
-    	try{
-    		$networkName = $credentials['networkName'];
-	        $networkClassName = 'Oara_Network_'.$networkName;
-	    	$affiliate = new $networkClassName($credentials);
-    	} catch (Exception $e){
-    		throw new Exception ('No Network Available '. $networkName);
-    	}
-        return $affiliate;  
-        
-    }
-	
+		$affiliate = null;
+		try{
+			$networkName = $credentials['networkName'];
+			$networkClassName = 'Oara_Network_'.$networkName;
+			$affiliate = new $networkClassName($credentials);
+		} catch (Exception $e){
+			throw new Exception ('No Network Available '. $networkName);
+		}
+		return $affiliate;  
+
+	}
+
 }

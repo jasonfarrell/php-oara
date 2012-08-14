@@ -60,7 +60,7 @@ class Oara_Network_CommissionJunction extends Oara_Network{
 	 */
 	public function __construct($credentials)
 	{
-		 
+
 		$user = $credentials['user'];
 		$password = $credentials['password'];
 		$this->_apiPassword = $credentials['apiPassword'];
@@ -69,51 +69,51 @@ class Oara_Network_CommissionJunction extends Oara_Network{
 
 		$loginUrl = 'https://members.cj.com/member/foundation/memberlogin.do?';
 		$valuesLogin = array(new Oara_Curl_Parameter('uname', $user),
-		new Oara_Curl_Parameter('pw', $password),
-		new Oara_Curl_Parameter('submit.x', '6'),
-		new Oara_Curl_Parameter('submit.y', '8')
+			new Oara_Curl_Parameter('pw', $password),
+			new Oara_Curl_Parameter('submit.x', '6'),
+			new Oara_Curl_Parameter('submit.y', '8')
 		);
 
 		$this->_client = new Oara_Curl_Access($loginUrl, $valuesLogin, $credentials);
 
 		$this->_exportMerchantParameters = array(new Oara_Curl_Parameter('sortKey', 'active_start_date'),
-		new Oara_Curl_Parameter('sortOrder', 'DESC'),
-		new Oara_Curl_Parameter('contractView', 'ALL'),
-		new Oara_Curl_Parameter('contractView', 'ALL'),
-		new Oara_Curl_Parameter('format', '6'),
-		new Oara_Curl_Parameter('contractState', 'active'),
-		new Oara_Curl_Parameter('column', 'merchantid'),
-		new Oara_Curl_Parameter('column', 'websitename'),
-		new Oara_Curl_Parameter('column', 'merchantcategory')
+			new Oara_Curl_Parameter('sortOrder', 'DESC'),
+			new Oara_Curl_Parameter('contractView', 'ALL'),
+			new Oara_Curl_Parameter('contractView', 'ALL'),
+			new Oara_Curl_Parameter('format', '6'),
+			new Oara_Curl_Parameter('contractState', 'active'),
+			new Oara_Curl_Parameter('column', 'merchantid'),
+			new Oara_Curl_Parameter('column', 'websitename'),
+			new Oara_Curl_Parameter('column', 'merchantcategory')
 		);
 
 		$this->_exportTransactionParameters = array(new Oara_Curl_Parameter('actionname', '0'),
-		new Oara_Curl_Parameter('period', 'range'),
-		new Oara_Curl_Parameter('what', 'commDetail'),
-		new Oara_Curl_Parameter('corrected', ''),
-		new Oara_Curl_Parameter('dtType', 'event'),
-		new Oara_Curl_Parameter('filterby', '-1'),
-		new Oara_Curl_Parameter('actiontype', ''),
-		new Oara_Curl_Parameter('status', ''),
-		new Oara_Curl_Parameter('filter', ''),
-		new Oara_Curl_Parameter('website', ''),
-		new Oara_Curl_Parameter('preselectrange', 'today'),
-		new Oara_Curl_Parameter('download', 'csv')
+			new Oara_Curl_Parameter('period', 'range'),
+			new Oara_Curl_Parameter('what', 'commDetail'),
+			new Oara_Curl_Parameter('corrected', ''),
+			new Oara_Curl_Parameter('dtType', 'event'),
+			new Oara_Curl_Parameter('filterby', '-1'),
+			new Oara_Curl_Parameter('actiontype', ''),
+			new Oara_Curl_Parameter('status', ''),
+			new Oara_Curl_Parameter('filter', ''),
+			new Oara_Curl_Parameter('website', ''),
+			new Oara_Curl_Parameter('preselectrange', 'today'),
+			new Oara_Curl_Parameter('download', 'csv')
 		);
 		$this->_exportOverviewParameters = array(
-		new Oara_Curl_Parameter('perfPubByWebsite', ''),
-		new Oara_Curl_Parameter('periodValue', ''),
-		new Oara_Curl_Parameter('what_name', 'All Web Sites'),
-		new Oara_Curl_Parameter('what', 'perfPubByAdvCompany'),
-		new Oara_Curl_Parameter('period', 'range'),
-		new Oara_Curl_Parameter('download', 'csv')
+			new Oara_Curl_Parameter('perfPubByWebsite', ''),
+			new Oara_Curl_Parameter('periodValue', ''),
+			new Oara_Curl_Parameter('what_name', 'All Web Sites'),
+			new Oara_Curl_Parameter('what', 'perfPubByAdvCompany'),
+			new Oara_Curl_Parameter('period', 'range'),
+			new Oara_Curl_Parameter('download', 'csv')
 		);
 
 		$this->_exportPaymentParameters = array(new Oara_Curl_Parameter('startRow', '0'),
-		new Oara_Curl_Parameter('sortKey', ''),
-		new Oara_Curl_Parameter('sortOrder', ''),
-		new Oara_Curl_Parameter('format', '6'),
-		new Oara_Curl_Parameter('button', 'Go')
+			new Oara_Curl_Parameter('sortKey', ''),
+			new Oara_Curl_Parameter('sortOrder', ''),
+			new Oara_Curl_Parameter('format', '6'),
+			new Oara_Curl_Parameter('button', 'Go')
 		);
 
 	}
@@ -172,15 +172,15 @@ class Oara_Network_CommissionJunction extends Oara_Network{
 			//echo "mechant".$cid." ".count($totalTransactions)."\n\n";
 			$merchantSlice = array_slice($merchantList, $it*20, 20);
 			try {
-				 
+
 				$transactionDateEnd = clone $dEndDate;
 				$transactionDateEnd->addDay(1);
 				$restUrl = 'https://commission-detail.api.cj.com/v3/commissions?cids='.implode(',',$merchantSlice).'&date-type=event&start-date='.$dStartDate->toString("yyyy-MM-dd").'&end-date='.$transactionDateEnd->toString("yyyy-MM-dd");
 				unset($transactionDateEnd);
 				$totalTransactions = array_merge($totalTransactions, self::getTransactionsXml($restUrl, $merchantList));
-				 
+
 			} catch (Exception $e) {
-				 
+
 				$dateArray = Oara_Utilities::daysOfDifference($dStartDate, $dEndDate);
 				$dateArraySize = sizeof($dateArray);
 				for ($j = 0; $j < $dateArraySize; $j++){
@@ -223,22 +223,22 @@ class Oara_Network_CommissionJunction extends Oara_Network{
 		$xml = simplexml_load_string($response->getBody(), null, LIBXML_NOERROR | LIBXML_NOWARNING);
 		if (isset($xml->commissions->commission)){
 			foreach ($xml->commissions->commission as $singleTransaction){
-					
+
 				if (in_array((int)self::findAttribute($singleTransaction, 'cid'),$merchantList)){
-					 
+
 					$transaction = Array();
 					$transaction['merchantId'] = self::findAttribute($singleTransaction, 'cid');
 					$transactionDate =  new Zend_Date(self::findAttribute($singleTransaction, 'event-date'),'yyyy-MM-ddTHH:mm:ss');
 					$transaction['date'] = $transactionDate->toString("yyyy-MM-dd HH:mm:ss");
 					unset ($transactionDate);
-					 
+
 					if (self::findAttribute($singleTransaction, 'sid') != null){
 						$transaction['custom_id'] = self::findAttribute($singleTransaction, 'sid');
 					}
 
 					$transaction['unique_id'] = self::findAttribute($singleTransaction, 'commission-id');
 
-					 
+
 
 					if (self::findAttribute($singleTransaction, 'action-status') == 'locked' || self::findAttribute($singleTransaction, 'action-status') == 'closed'){
 						$transaction['status'] = Oara_Utilities::STATUS_CONFIRMED;
@@ -247,7 +247,7 @@ class Oara_Network_CommissionJunction extends Oara_Network{
 					} else if (self::findAttribute($singleTransaction, 'action-status') == 'corrected'){
 						$transaction['status'] = Oara_Utilities::STATUS_DECLINED;
 					}
-					 
+
 					$transaction['amount'] = (double)$filter->filter(self::findAttribute($singleTransaction, 'sale-amount'));
 					$transaction['commission'] = (double)$filter->filter(self::findAttribute($singleTransaction, 'commission-amount'));
 					$totalTransactions[] = $transaction;
@@ -339,7 +339,7 @@ class Oara_Network_CommissionJunction extends Oara_Network{
 				$merchantReportList[] = $merchantExportArray;
 			}
 		}
-		 
+
 		return $merchantReportList;
 	}
 	/**

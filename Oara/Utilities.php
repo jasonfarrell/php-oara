@@ -98,7 +98,7 @@ class Oara_Utilities
 		$dateArray = array();
 		$dateArray[] = clone $starDate;
 		/**If there are more than 1 month of difference ,
-		 the next  element starts in the first day of the month**/
+		the next  element starts in the first day of the month**/
 		for($i=0;$i<$difference;$i++){
 			$auxDate = clone $starDate;
 			$auxDate->addYear($i+1);
@@ -125,7 +125,7 @@ class Oara_Utilities
 		$dateArray = array();
 		$dateArray[] = clone $startDate;
 		/**If there are more than 1 month of difference ,
-		 the next  element starts in the first day of the month**/
+		the next  element starts in the first day of the month**/
 		for($i = 0;$i < $difference;$i++){
 			$auxDate = clone $startDate;
 			$auxDate->addMonth(($i+1)*$gap);
@@ -149,7 +149,7 @@ class Oara_Utilities
 		$dateArray = array();
 		$dateArray[] = clone $starDate;
 		/**If there are more than 1 month of difference ,
-		 the next  element starts in the first day of the month**/
+		the next  element starts in the first day of the month**/
 		for($i=0;$i<$difference;$i++){
 			$auxDate = clone $starDate;
 			$auxDate->addDay($i+1);
@@ -178,7 +178,7 @@ class Oara_Utilities
 		$dateArray = array();
 		$dateArray[] = clone $starDate;
 		/**If there are more than 1 month of difference ,
-		 the next  element starts in the first day of the month**/
+		the next  element starts in the first day of the month**/
 		for($i=0;$i < $difference;$i++){
 			$auxDate = clone $auxStartDate;
 			$auxDate->addWeek($i+1);
@@ -250,7 +250,7 @@ class Oara_Utilities
 			}
 			$i++;
 		}
-			
+
 		return $result;
 	}
 	/**
@@ -285,25 +285,25 @@ class Oara_Utilities
 		$ok = false;
 		$i = 0;
 		$properties = array(
-	                        'click_number',
-	                        'impression_number',
-	                        'transaction_number',
-	                        'transaction_confirmed_value',
-	                        'transaction_confirmed_commission',
-	                        'transaction_pending_value',
-	                        'transaction_pending_commission',
-	                        'transaction_declined_value',
-	                        'transaction_declined_commission',
-							'transaction_paid_value',
-	                        'transaction_paid_commission'
-	                        );
-	                        while ($i < count($properties) && !$ok){
-	                        	if ($register[$properties[$i]] != 0){
-	                        		$ok = true;
-	                        	}
-	                        	$i++;
-	                        }
-	                        return $ok;
+			'click_number',
+			'impression_number',
+			'transaction_number',
+			'transaction_confirmed_value',
+			'transaction_confirmed_commission',
+			'transaction_pending_value',
+			'transaction_pending_commission',
+			'transaction_declined_value',
+			'transaction_declined_commission',
+			'transaction_paid_value',
+			'transaction_paid_commission'
+		);
+		while ($i < count($properties) && !$ok){
+			if ($register[$properties[$i]] != 0){
+				$ok = true;
+			}
+			$i++;
+		}
+		return $ok;
 	}
 	/**
 	 * Filter the transactionList per day
@@ -322,7 +322,7 @@ class Oara_Utilities
 			}
 			$transactionMap[$transaction['merchantId']][$dateString][] = $transaction;
 		}
-			
+
 		return $transactionMap;
 	}
 
@@ -334,9 +334,9 @@ class Oara_Utilities
 	public static function parseDouble($data){
 		$double = 0;
 		if($data != null){
-				
+
 			$bits = explode(",",trim($data)); // split input value up to allow checking
-			 
+
 			$last = strlen($bits[count($bits) -1]); // gets part after first comma (thousands (or decimals if incorrectly used by user)
 			if ($last <3){ // checks for comma being used as decimal place
 				$convertnum = str_replace(",",".",trim($data));
@@ -419,10 +419,10 @@ class Oara_Utilities
 	 */
 	public static function arguments($args) {
 		$ret = array(
-        'exec'      => '',
-        'options'   => array(),
-        'flags'     => array(),
-        'arguments' => array(),
+			'exec'      => '',
+			'options'   => array(),
+			'flags'     => array(),
+			'arguments' => array(),
 		);
 
 		$ret['exec'] = array_shift( $args );
@@ -434,17 +434,17 @@ class Oara_Utilities
 
 				// is it the syntax '--option=argument'?
 				if (strpos($option,'=') !== FALSE)
-				array_push( $ret['options'], explode('=', $option, 2) );
+					array_push( $ret['options'], explode('=', $option, 2) );
 				else
-				array_push( $ret['options'], $option );
-				 
+					array_push( $ret['options'], $option );
+
 				continue;
 			}
 
 			// Is it a flag or a serial of flags? (prefixed with -)
 			if ( substr( $arg, 0, 1 ) === '-' ) {
 				for ($i = 1; isset($arg[$i]) ; $i++)
-				$ret['flags'][] = $arg[$i];
+					$ret['flags'][] = $arg[$i];
 
 				continue;
 			}

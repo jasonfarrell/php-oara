@@ -13,9 +13,9 @@ class Oara_Network_Demo extends Oara_Network{
 	private $_affiliateNetwork = null;
 
 	private $_merchantList = array("Acme Corp" , "Allied Biscuit" , "Ankh-Sto Associates" , "Extensive Enterprise" , "Corp" , "Globo-Chem",
-								   "Mr. Sparkle", "Globex Corporation", "LexCorp", "LuthorCorp", "North Central Electronics",
-								   "Omni Consumer Products", "Praxis Corporation", "Sombra Corporation" , "Sto Plains Holdings",
-								   "Sto Plains Holdings", "Yuhu Limited");
+		"Mr. Sparkle", "Globex Corporation", "LexCorp", "LuthorCorp", "North Central Electronics",
+		"Omni Consumer Products", "Praxis Corporation", "Sombra Corporation" , "Sto Plains Holdings",
+		"Sto Plains Holdings", "Yuhu Limited");
 
 	//private $_linkList = array("homepage_content", "shopping_cart_sidenav", "footer", "linkspage", "homepage_header", "para_one_content_home");
 	private $_linkList = array("unknown");

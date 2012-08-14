@@ -64,159 +64,159 @@ class Oara_Network_Smg extends Oara_Network{
 		self::newLogin();
 
 		$this->_oldExportMerchantParameters = array(new Oara_Curl_Parameter('reportName', 'aAffiliateMyProgramsReport'),
-		new Oara_Curl_Parameter('tabMenuName', ''),
-		new Oara_Curl_Parameter('isPostBack', ''),
-		new Oara_Curl_Parameter('showAdvanced', 'true'),
-		new Oara_Curl_Parameter('showFavorite', 'false'),
-		new Oara_Curl_Parameter('run_as_organization_id', ''),
-		new Oara_Curl_Parameter('minRelativeIntervalStartTime', '0'),
-		new Oara_Curl_Parameter('maxIntervalSize', '0'),
-		new Oara_Curl_Parameter('interval', 'MONTHS'),
-		new Oara_Curl_Parameter('reportPrograms', ''),
-		new Oara_Curl_Parameter('reportTitleTextKey', 'REPORT3_SERVICE_REPORTS_AAFFILIATEMYPROGRAMSREPORT_TITLE'),
-		new Oara_Curl_Parameter('setColumns', 'true'),
-		new Oara_Curl_Parameter('latestDayToExecute', '0'),
-		new Oara_Curl_Parameter('affiliateId', ''),
-		new Oara_Curl_Parameter('includeWarningColumn', 'true'),
-		new Oara_Curl_Parameter('sortBy', 'orderDefault'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('columns', 'programId'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('columns', 'affiliateId'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('columns', 'applicationDate'),
-		new Oara_Curl_Parameter('autoCheckbox', 'columns'),
-		new Oara_Curl_Parameter('columns', 'status'),
-		new Oara_Curl_Parameter('autoCheckbox', 'useMetricColumn'),
-		new Oara_Curl_Parameter('customKeyMetricCount', '0'),
-		new Oara_Curl_Parameter('metric1.name', ''),
-		new Oara_Curl_Parameter('metric1.midFactor', ''),
-		new Oara_Curl_Parameter('metric1.midOperator', '/'),
-		new Oara_Curl_Parameter('metric1.columnName1', 'programId'),
-		new Oara_Curl_Parameter('metric1.operator1', '/'),
-		new Oara_Curl_Parameter('metric1.columnName2', 'programId'),
-		new Oara_Curl_Parameter('metric1.lastOperator', '/'),
-		new Oara_Curl_Parameter('metric1.factor', ''),
-		new Oara_Curl_Parameter('metric1.summaryType', 'NONE'),
-		new Oara_Curl_Parameter('format', 'CSV'),
-		new Oara_Curl_Parameter('separator', ','),
-		new Oara_Curl_Parameter('dateType', '0'),
-		new Oara_Curl_Parameter('favoriteId', ''),
-		new Oara_Curl_Parameter('favoriteName', ''),
-		new Oara_Curl_Parameter('favoriteDescription', '')
+			new Oara_Curl_Parameter('tabMenuName', ''),
+			new Oara_Curl_Parameter('isPostBack', ''),
+			new Oara_Curl_Parameter('showAdvanced', 'true'),
+			new Oara_Curl_Parameter('showFavorite', 'false'),
+			new Oara_Curl_Parameter('run_as_organization_id', ''),
+			new Oara_Curl_Parameter('minRelativeIntervalStartTime', '0'),
+			new Oara_Curl_Parameter('maxIntervalSize', '0'),
+			new Oara_Curl_Parameter('interval', 'MONTHS'),
+			new Oara_Curl_Parameter('reportPrograms', ''),
+			new Oara_Curl_Parameter('reportTitleTextKey', 'REPORT3_SERVICE_REPORTS_AAFFILIATEMYPROGRAMSREPORT_TITLE'),
+			new Oara_Curl_Parameter('setColumns', 'true'),
+			new Oara_Curl_Parameter('latestDayToExecute', '0'),
+			new Oara_Curl_Parameter('affiliateId', ''),
+			new Oara_Curl_Parameter('includeWarningColumn', 'true'),
+			new Oara_Curl_Parameter('sortBy', 'orderDefault'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('columns', 'programId'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('columns', 'affiliateId'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('columns', 'applicationDate'),
+			new Oara_Curl_Parameter('autoCheckbox', 'columns'),
+			new Oara_Curl_Parameter('columns', 'status'),
+			new Oara_Curl_Parameter('autoCheckbox', 'useMetricColumn'),
+			new Oara_Curl_Parameter('customKeyMetricCount', '0'),
+			new Oara_Curl_Parameter('metric1.name', ''),
+			new Oara_Curl_Parameter('metric1.midFactor', ''),
+			new Oara_Curl_Parameter('metric1.midOperator', '/'),
+			new Oara_Curl_Parameter('metric1.columnName1', 'programId'),
+			new Oara_Curl_Parameter('metric1.operator1', '/'),
+			new Oara_Curl_Parameter('metric1.columnName2', 'programId'),
+			new Oara_Curl_Parameter('metric1.lastOperator', '/'),
+			new Oara_Curl_Parameter('metric1.factor', ''),
+			new Oara_Curl_Parameter('metric1.summaryType', 'NONE'),
+			new Oara_Curl_Parameter('format', 'CSV'),
+			new Oara_Curl_Parameter('separator', ','),
+			new Oara_Curl_Parameter('dateType', '0'),
+			new Oara_Curl_Parameter('favoriteId', ''),
+			new Oara_Curl_Parameter('favoriteName', ''),
+			new Oara_Curl_Parameter('favoriteDescription', '')
 		);
-			
-		$this->_oldExportTransactionParameters = array(new Oara_Curl_Parameter('reportName', 'aAffiliateEventBreakdownReport'),
-		new Oara_Curl_Parameter('columns', 'programId'),
-		new Oara_Curl_Parameter('columns', 'timeOfVisit'),
-		new Oara_Curl_Parameter('columns', 'timeOfEvent'),
-		new Oara_Curl_Parameter('columns', 'timeInSession'),
-		new Oara_Curl_Parameter('columns', 'lastModified'),
-		new Oara_Curl_Parameter('columns', 'epi1'),
-		new Oara_Curl_Parameter('columns', 'eventName'),
-		new Oara_Curl_Parameter('columns', 'pendingStatus'),
-		new Oara_Curl_Parameter('columns', 'siteName'),
-		new Oara_Curl_Parameter('columns', 'graphicalElementName'),
-		new Oara_Curl_Parameter('columns', 'graphicalElementId'),
-		new Oara_Curl_Parameter('columns', 'productName'),
-		new Oara_Curl_Parameter('columns', 'productNrOf'),
-		new Oara_Curl_Parameter('columns', 'productValue'),
-		new Oara_Curl_Parameter('columns', 'affiliateCommission'),
-		new Oara_Curl_Parameter('columns', 'link'),
-		new Oara_Curl_Parameter('columns', 'leadNR'),
-		new Oara_Curl_Parameter('columns', 'orderNR'),
-		new Oara_Curl_Parameter('columns', 'pendingReason'),
-		new Oara_Curl_Parameter('columns', 'orderValue'),
-		new Oara_Curl_Parameter('isPostBack', ''),
-		new Oara_Curl_Parameter('metric1.lastOperator', '/'),
-		new Oara_Curl_Parameter('interval', ''),
-		new Oara_Curl_Parameter('favoriteDescription', ''),
-		new Oara_Curl_Parameter('currencyId', 'GBP'),
-		new Oara_Curl_Parameter('event_id', '0'),
-		new Oara_Curl_Parameter('pending_status', '1'),
-		new Oara_Curl_Parameter('run_as_organization_id', ''),
-		new Oara_Curl_Parameter('minRelativeIntervalStartTime', '0'),
-		new Oara_Curl_Parameter('includeWarningColumn', 'true'),
-		new Oara_Curl_Parameter('metric1.summaryType', 'NONE'),
-		new Oara_Curl_Parameter('metric1.operator1', '/'),
-		new Oara_Curl_Parameter('latestDayToExecute', '0'),
-		new Oara_Curl_Parameter('showAdvanced', 'true'),
-		new Oara_Curl_Parameter('breakdownOption', '1'),
-		new Oara_Curl_Parameter('metric1.midFactor', ''),
-		new Oara_Curl_Parameter('reportTitleTextKey', 'REPORT3_SERVICE_REPORTS_AAFFILIATEEVENTBREAKDOWNREPORT_TITLE'),
-		new Oara_Curl_Parameter('setColumns', 'true'),
-		new Oara_Curl_Parameter('metric1.columnName1', 'orderValue'),
-		new Oara_Curl_Parameter('metric1.columnName2', 'orderValue'),
-		new Oara_Curl_Parameter('reportPrograms', ''),
-		new Oara_Curl_Parameter('metric1.midOperator', '/'),
-		new Oara_Curl_Parameter('dateSelectionType', '1'),
-		new Oara_Curl_Parameter('favoriteName', ''),
-		new Oara_Curl_Parameter('affiliateId', ''),
-		new Oara_Curl_Parameter('dateType', '1'),
-		new Oara_Curl_Parameter('period', 'custom_period'),
-		new Oara_Curl_Parameter('tabMenuName', ''),
-		new Oara_Curl_Parameter('maxIntervalSize', '0'),
-		new Oara_Curl_Parameter('favoriteId', ''),
-		new Oara_Curl_Parameter('sortBy', 'timeOfEvent'),
-		new Oara_Curl_Parameter('metric1.name', ''),
-		new Oara_Curl_Parameter('customKeyMetricCount', '0'),
-		new Oara_Curl_Parameter('metric1.factor', ''),
-		new Oara_Curl_Parameter('showFavorite', 'false'),
-		new Oara_Curl_Parameter('separator', ','),
-		new Oara_Curl_Parameter('format', 'CSV')
-		);
-			
 
-			
+		$this->_oldExportTransactionParameters = array(new Oara_Curl_Parameter('reportName', 'aAffiliateEventBreakdownReport'),
+			new Oara_Curl_Parameter('columns', 'programId'),
+			new Oara_Curl_Parameter('columns', 'timeOfVisit'),
+			new Oara_Curl_Parameter('columns', 'timeOfEvent'),
+			new Oara_Curl_Parameter('columns', 'timeInSession'),
+			new Oara_Curl_Parameter('columns', 'lastModified'),
+			new Oara_Curl_Parameter('columns', 'epi1'),
+			new Oara_Curl_Parameter('columns', 'eventName'),
+			new Oara_Curl_Parameter('columns', 'pendingStatus'),
+			new Oara_Curl_Parameter('columns', 'siteName'),
+			new Oara_Curl_Parameter('columns', 'graphicalElementName'),
+			new Oara_Curl_Parameter('columns', 'graphicalElementId'),
+			new Oara_Curl_Parameter('columns', 'productName'),
+			new Oara_Curl_Parameter('columns', 'productNrOf'),
+			new Oara_Curl_Parameter('columns', 'productValue'),
+			new Oara_Curl_Parameter('columns', 'affiliateCommission'),
+			new Oara_Curl_Parameter('columns', 'link'),
+			new Oara_Curl_Parameter('columns', 'leadNR'),
+			new Oara_Curl_Parameter('columns', 'orderNR'),
+			new Oara_Curl_Parameter('columns', 'pendingReason'),
+			new Oara_Curl_Parameter('columns', 'orderValue'),
+			new Oara_Curl_Parameter('isPostBack', ''),
+			new Oara_Curl_Parameter('metric1.lastOperator', '/'),
+			new Oara_Curl_Parameter('interval', ''),
+			new Oara_Curl_Parameter('favoriteDescription', ''),
+			new Oara_Curl_Parameter('currencyId', 'GBP'),
+			new Oara_Curl_Parameter('event_id', '0'),
+			new Oara_Curl_Parameter('pending_status', '1'),
+			new Oara_Curl_Parameter('run_as_organization_id', ''),
+			new Oara_Curl_Parameter('minRelativeIntervalStartTime', '0'),
+			new Oara_Curl_Parameter('includeWarningColumn', 'true'),
+			new Oara_Curl_Parameter('metric1.summaryType', 'NONE'),
+			new Oara_Curl_Parameter('metric1.operator1', '/'),
+			new Oara_Curl_Parameter('latestDayToExecute', '0'),
+			new Oara_Curl_Parameter('showAdvanced', 'true'),
+			new Oara_Curl_Parameter('breakdownOption', '1'),
+			new Oara_Curl_Parameter('metric1.midFactor', ''),
+			new Oara_Curl_Parameter('reportTitleTextKey', 'REPORT3_SERVICE_REPORTS_AAFFILIATEEVENTBREAKDOWNREPORT_TITLE'),
+			new Oara_Curl_Parameter('setColumns', 'true'),
+			new Oara_Curl_Parameter('metric1.columnName1', 'orderValue'),
+			new Oara_Curl_Parameter('metric1.columnName2', 'orderValue'),
+			new Oara_Curl_Parameter('reportPrograms', ''),
+			new Oara_Curl_Parameter('metric1.midOperator', '/'),
+			new Oara_Curl_Parameter('dateSelectionType', '1'),
+			new Oara_Curl_Parameter('favoriteName', ''),
+			new Oara_Curl_Parameter('affiliateId', ''),
+			new Oara_Curl_Parameter('dateType', '1'),
+			new Oara_Curl_Parameter('period', 'custom_period'),
+			new Oara_Curl_Parameter('tabMenuName', ''),
+			new Oara_Curl_Parameter('maxIntervalSize', '0'),
+			new Oara_Curl_Parameter('favoriteId', ''),
+			new Oara_Curl_Parameter('sortBy', 'timeOfEvent'),
+			new Oara_Curl_Parameter('metric1.name', ''),
+			new Oara_Curl_Parameter('customKeyMetricCount', '0'),
+			new Oara_Curl_Parameter('metric1.factor', ''),
+			new Oara_Curl_Parameter('showFavorite', 'false'),
+			new Oara_Curl_Parameter('separator', ','),
+			new Oara_Curl_Parameter('format', 'CSV')
+		);
+
+
+
 		$this->_oldExportOverviewParameters = array(new Oara_Curl_Parameter('reportName','aAffiliateProgramOverviewReport'),
-		new Oara_Curl_Parameter('tabMenuName',''),
-		new Oara_Curl_Parameter('isPostBack',''),
-		new Oara_Curl_Parameter('showAdvanced','true'),
-		new Oara_Curl_Parameter('showFavorite','false'),
-		new Oara_Curl_Parameter('run_as_organization_id',''),
-		new Oara_Curl_Parameter('minRelativeIntervalStartTime','0'),
-		new Oara_Curl_Parameter('maxIntervalSize','12'),
-		new Oara_Curl_Parameter('interval','MONTHS'),
-		new Oara_Curl_Parameter('reportPrograms',''),
-		new Oara_Curl_Parameter('reportTitleTextKey','REPORT3_SERVICE_REPORTS_AAFFILIATEPROGRAMOVERVIEWREPORT_TITLE'),
-		new Oara_Curl_Parameter('setColumns','true'),
-		new Oara_Curl_Parameter('latestDayToExecute','0'),
-		new Oara_Curl_Parameter('programTypeId',''),
-		new Oara_Curl_Parameter('currencyId','GBP'),
-		new Oara_Curl_Parameter('includeWarningColumn','true'),
-		new Oara_Curl_Parameter('programId',''),
-		new Oara_Curl_Parameter('period','custom_period'),
-		new Oara_Curl_Parameter('columns','programId'),
-		new Oara_Curl_Parameter('columns','impNrOf'),
-		new Oara_Curl_Parameter('columns','clickNrOf'),
-		new Oara_Curl_Parameter('autoCheckbox','columns'),
-		new Oara_Curl_Parameter('autoCheckbox','useMetricColumn'),
-		new Oara_Curl_Parameter('customKeyMetricCount','0'),
-		new Oara_Curl_Parameter('metric1.name',''),
-		new Oara_Curl_Parameter('metric1.midFactor',''),
-		new Oara_Curl_Parameter('metric1.midOperator','/'),
-		new Oara_Curl_Parameter('metric1.columnName1','programId'),
-		new Oara_Curl_Parameter('metric1.operator1','/'),
-		new Oara_Curl_Parameter('metric1.columnName2','programId'),
-		new Oara_Curl_Parameter('metric1.lastOperator','/'),
-		new Oara_Curl_Parameter('metric1.factor',''),
-		new Oara_Curl_Parameter('metric1.summaryType','NONE'),
-		new Oara_Curl_Parameter('format','CSV'),
-		new Oara_Curl_Parameter('separator',';'),
-		new Oara_Curl_Parameter('dateType','1'),
-		new Oara_Curl_Parameter('favoriteId',''),
-		new Oara_Curl_Parameter('favoriteName',''),
-		new Oara_Curl_Parameter('favoriteDescription','')
+			new Oara_Curl_Parameter('tabMenuName',''),
+			new Oara_Curl_Parameter('isPostBack',''),
+			new Oara_Curl_Parameter('showAdvanced','true'),
+			new Oara_Curl_Parameter('showFavorite','false'),
+			new Oara_Curl_Parameter('run_as_organization_id',''),
+			new Oara_Curl_Parameter('minRelativeIntervalStartTime','0'),
+			new Oara_Curl_Parameter('maxIntervalSize','12'),
+			new Oara_Curl_Parameter('interval','MONTHS'),
+			new Oara_Curl_Parameter('reportPrograms',''),
+			new Oara_Curl_Parameter('reportTitleTextKey','REPORT3_SERVICE_REPORTS_AAFFILIATEPROGRAMOVERVIEWREPORT_TITLE'),
+			new Oara_Curl_Parameter('setColumns','true'),
+			new Oara_Curl_Parameter('latestDayToExecute','0'),
+			new Oara_Curl_Parameter('programTypeId',''),
+			new Oara_Curl_Parameter('currencyId','GBP'),
+			new Oara_Curl_Parameter('includeWarningColumn','true'),
+			new Oara_Curl_Parameter('programId',''),
+			new Oara_Curl_Parameter('period','custom_period'),
+			new Oara_Curl_Parameter('columns','programId'),
+			new Oara_Curl_Parameter('columns','impNrOf'),
+			new Oara_Curl_Parameter('columns','clickNrOf'),
+			new Oara_Curl_Parameter('autoCheckbox','columns'),
+			new Oara_Curl_Parameter('autoCheckbox','useMetricColumn'),
+			new Oara_Curl_Parameter('customKeyMetricCount','0'),
+			new Oara_Curl_Parameter('metric1.name',''),
+			new Oara_Curl_Parameter('metric1.midFactor',''),
+			new Oara_Curl_Parameter('metric1.midOperator','/'),
+			new Oara_Curl_Parameter('metric1.columnName1','programId'),
+			new Oara_Curl_Parameter('metric1.operator1','/'),
+			new Oara_Curl_Parameter('metric1.columnName2','programId'),
+			new Oara_Curl_Parameter('metric1.lastOperator','/'),
+			new Oara_Curl_Parameter('metric1.factor',''),
+			new Oara_Curl_Parameter('metric1.summaryType','NONE'),
+			new Oara_Curl_Parameter('format','CSV'),
+			new Oara_Curl_Parameter('separator',';'),
+			new Oara_Curl_Parameter('dateType','1'),
+			new Oara_Curl_Parameter('favoriteId',''),
+			new Oara_Curl_Parameter('favoriteName',''),
+			new Oara_Curl_Parameter('favoriteDescription','')
 		);
 
 	}
@@ -227,7 +227,7 @@ class Oara_Network_Smg extends Oara_Network{
 		$loginUrl = 'http://publisher.tradedoubler.com/pan/login';
 
 		$valuesLogin = array(new Oara_Curl_Parameter('j_username', $user),
-		new Oara_Curl_Parameter('j_password', $password)
+			new Oara_Curl_Parameter('j_password', $password)
 		);
 
 		$credentials = $this->_credentials;
@@ -242,9 +242,9 @@ class Oara_Network_Smg extends Oara_Network{
 		$loginUrl = 'https://member.impactradius.co.uk/secure/login.user';
 
 		$valuesLogin = array(new Oara_Curl_Parameter('j_username', $user),
-		new Oara_Curl_Parameter('j_password', $password)
+			new Oara_Curl_Parameter('j_password', $password)
 		);
-			
+
 		$credentials = $this->_credentials;
 		$credentials["cookieName"] .= "new";
 		$this->_newClient = new Oara_Curl_Access($loginUrl, $valuesLogin, $credentials);
@@ -301,7 +301,7 @@ class Oara_Network_Smg extends Oara_Network{
 			if (isset($res->Campaigns)){
 				$newApi = true;
 			}
-			
+
 		}
 
 
@@ -390,19 +390,19 @@ class Oara_Network_Smg extends Oara_Network{
 		}
 
 		if ($this->_newAccess){
-				
+
 			$uri = "https://".$this->_accountSid.":".$this->_authToken."@api.impactradius.com/2010-09-01/Mediapartners/".$this->_accountSid."/Campaigns.xml";
 			$res = simplexml_load_file($uri);
 			$currentPage = (int)$res->Campaigns->attributes()->page;
 			$pageNumber = (int)$res->Campaigns->attributes()->numpages;
 			while ($currentPage <= $pageNumber){
-					
+
 				foreach ($res->Campaigns->Campaign as $campaign){
 					$campaignId = (int)$campaign->CampaignId;
 					$campaignName = (string)$campaign->CampaignName;
 					$merchantReportList[$campaignId] = $campaignName;
 				}
-					
+
 				$currentPage++;
 				$nextPageUri = (string)$res->Campaigns->attributes()->nextpageuri;
 				if ($nextPageUri != null){
@@ -439,8 +439,8 @@ class Oara_Network_Smg extends Oara_Network{
 		$filter = new Zend_Filter_LocalizedToNormalized(array('precision' => 2));
 		if ($this->_oldAccess){
 			self::oldlogin();
-			
-	
+
+
 			$valuesFormExport = Oara_Utilities::cloneArray($this->_oldExportTransactionParameters);
 			$valuesFormExport[] = new Oara_Curl_Parameter('startDate',  self::formatDate($dStartDate));
 			$valuesFormExport[] = new Oara_Curl_Parameter('endDate',  self::formatDate($dEndDate));
@@ -451,15 +451,15 @@ class Oara_Network_Smg extends Oara_Network{
 			$exportData = str_getcsv($exportReport[0],"\r\n");
 			$num = count($exportData);
 			for ($i = 2; $i < $num-1; $i++) {
-				
+
 				$transactionExportArray = str_getcsv($exportData[$i],",");
-	
+
 				if (!isset($transactionExportArray[2])){
 					throw new Exception('Problem getting transaction\n\n');
 				}
-				 
+
 				if ($transactionExportArray[0] !== '' && in_array((int)$transactionExportArray[2],$merchantList)){
-					
+
 					$transaction = Array();
 					$transaction['merchantId'] = $transactionExportArray[2];
 					$transactionDate = self::toDate($transactionExportArray[4]);
@@ -474,7 +474,7 @@ class Oara_Network_Smg extends Oara_Network{
 					if ($transactionExportArray[9] != ''){
 						$transaction['custom_id'] = $transactionExportArray[9];
 					}
-					
+
 					if ($transactionExportArray[11] == 'A'){
 						$transaction['status'] = Oara_Utilities::STATUS_CONFIRMED;
 					} else if ($transactionExportArray[11] == 'P'){
@@ -482,13 +482,13 @@ class Oara_Network_Smg extends Oara_Network{
 					} else if ($transactionExportArray[11] == 'D'){
 						$transaction['status'] = Oara_Utilities::STATUS_DECLINED;
 					}
-	
+
 					if ($transactionExportArray[7] != ''){
 						$transaction['amount'] = $filter->filter($transactionExportArray[20]);
 					} else {
 						$transaction['amount'] = $filter->filter($transactionExportArray[19]);
 					}
-	
+
 					$transaction['commission'] = $filter->filter($transactionExportArray[20]);
 					$totalTransactions[] = $transaction;
 				}
@@ -498,7 +498,7 @@ class Oara_Network_Smg extends Oara_Network{
 		if ($this->_newAccess){
 			//New Interface
 			$uri = "https://".$this->_accountSid.":".$this->_authToken."@api.impactradius.com/2010-09-01/Mediapartners/".
-			$this->_accountSid."/Actions?ActionDateStart=".$dStartDate->toString('yyyy-MM-ddTHH:mm:ss')."-00:00&ActionDateEnd=".$dEndDate->toString('yyyy-MM-ddTHH:mm:ss')."-00:00";
+				$this->_accountSid."/Actions?ActionDateStart=".$dStartDate->toString('yyyy-MM-ddTHH:mm:ss')."-00:00&ActionDateEnd=".$dEndDate->toString('yyyy-MM-ddTHH:mm:ss')."-00:00";
 			$res = simplexml_load_file($uri);
 			$currentPage = (int)$res->Actions->attributes()->page;
 			$pageNumber = (int)$res->Actions->attributes()->numpages;
@@ -510,7 +510,7 @@ class Oara_Network_Smg extends Oara_Network{
 
 					$transactionDate =  new Zend_Date((string)$action->EventDate, "yyyy-MM-dd HH:mm:ss");
 					$transaction['date'] = $transactionDate->toString("yyyy-MM-dd HH:mm:ss");
-					
+
 					$transaction['unique_id'] = (string)$action->Id;
 					if ((string)$action->SharedId != ''){
 						$transaction['custom_id'] = (string)$action->SharedId;
@@ -631,7 +631,7 @@ class Oara_Network_Smg extends Oara_Network{
 		} else {
 			return $content;
 		}
-			
+
 	}
 
 	/**
@@ -669,14 +669,14 @@ class Oara_Network_Smg extends Oara_Network{
 						$pid = $paymentLines->item($i)->attributes->getNamedItem("value")->nodeValue;
 						if (is_numeric($pid)){
 							$obj = array();
-	
+
 							$paymentLine = $paymentLines->item($i)->nodeValue;
 							$paymentLine = htmlentities($paymentLine);
 							$paymentLine = str_replace("&Acirc;&nbsp;", "", $paymentLine);
 							$paymentLine = html_entity_decode($paymentLine);
-	
+
 							$date = self::toDate(substr($paymentLine,0,10));
-	
+
 							$obj['date'] = $date->toString("yyyy-MM-dd HH:mm:ss");
 							$obj['pid'] = $pid;
 							$obj['method'] = 'BACS';
@@ -685,7 +685,7 @@ class Oara_Network_Smg extends Oara_Network{
 							} else {
 								throw new Exception("Problem reading payments");
 							}
-	
+
 							$paymentHistory[] = $obj;
 						}
 					}
@@ -693,16 +693,16 @@ class Oara_Network_Smg extends Oara_Network{
 			}
 		}
 		if ($this->_newAccess){
-			
+
 			$urls = array();
 			$urls[] = new Oara_Curl_Request('https://member.impactradius.co.uk/secure/nositemesh/accounting/getPayStubParamsCSV.csv', array());
 			$exportReport = $this->_newClient->get($urls);
 			$exportData = str_getcsv($exportReport[0], "\n");
-			
+
 			$num = count($exportData);
 			for ($i = 1; $i < $num; $i++) {
 				$paymentExportArray = str_getcsv($exportData[$i], ",");
-				
+
 				$obj = array();
 
 				$date = new Zend_Date($paymentExportArray[1], "dd MMM, yyyy");
@@ -720,9 +720,9 @@ class Oara_Network_Smg extends Oara_Network{
 		}
 		return $paymentHistory;
 	}
-	
-	
-	
+
+
+
 	/**
 	 *
 	 * Add Dates in a certain format to the criteriaList

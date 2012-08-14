@@ -6,10 +6,10 @@
  *
  * Parameters:
  * 
- * 	-s 	startDate with format dd/MM/yyyy (11/06/2011)
- *  -e 	endDate with format dd/MM/yyyy (11/06/2011)
- *	-n 	network name of the Oara_Network class for the network (AffiliateWindow, BuyAt, Dgm, WebGains......)
- *	-t 	type this param is not compulsory, choose which report we want, by default it will show us all of them (payment, merchant, transaction, overview)
+ *	-s	startDate with format dd/MM/yyyy (11/06/2011)
+ *	-e	endDate with format dd/MM/yyyy (11/06/2011)
+ *	-n	network name of the Oara_Network class for the network (AffiliateWindow, BuyAt, Dgm, WebGains......)
+ *	-t	type this param is not compulsory, choose which report we want, by default it will show us all of them (payment, merchant, transaction, overview)
  *
  *
  *	Examples from command line:
@@ -29,7 +29,6 @@ $argumentsMap = array();
 
 $argumentsNumber = count($arguments['arguments']);
 for ($i = 0; $i < $argumentsNumber; $i++){
-	
 	$argumentsMap[$arguments['flags'][$i]] = $arguments['arguments'][$i];
 }
 
@@ -58,18 +57,18 @@ if (isset($argumentsMap['s']) && isset($argumentsMap['e']) && isset($argumentsMa
 		"\n".
 		" 	NB: Please check you have entered your credentials in your credential.ini before you run this script.".
 		"\n".
-	 	" 	Parameters:\n".
-	 	"\n".
-	 	" 		-s 	startDate with format dd/MM/yyyy (11/06/2011)\n".
-	 	" 		-e 	endDate with format dd/MM/yyyy (11/06/2011)\n".
-	 	"		-n 	network name of the Oara_Network class for the network (AffiliateWindow, BuyAt, Dgm, WebGains......)\n".
-	 	"		-t 	type this param is not compulsory, choose which report we want, by default it will show us all of them (payment, merchant, transaction, overview)\n".
-	 	"\n".
-	 	"	Examples from command line:\n".
-	 	"\n".
-	 	"		php affjet.php -s 12/02/2010 -e 15/06/2011 -n TradeDoubler\n".
-	 	"		php affjet.php -s 12/02/2010 -e 15/06/2011 -n TradeDoubler -t merchant\n".
-	 	"		php affjet.php -s 12/02/2010 -e 15/06/2011 -n AffiliateWindow -t payment\n"	
+		" 	Parameters:\n".
+		"\n".
+		" 		-s 	startDate with format dd/MM/yyyy (11/06/2011)\n".
+		" 		-e 	endDate with format dd/MM/yyyy (11/06/2011)\n".
+		"		-n 	network name of the Oara_Network class for the network (AffiliateWindow, BuyAt, Dgm, WebGains......)\n".
+		"		-t 	type this param is not compulsory, choose which report we want, by default it will show us all of them (payment, merchant, transaction, overview)\n".
+		"\n".
+		"	Examples from command line:\n".
+		"\n".
+		"		php affjet.php -s 12/02/2010 -e 15/06/2011 -n TradeDoubler\n".
+		"		php affjet.php -s 12/02/2010 -e 15/06/2011 -n TradeDoubler -t merchant\n".
+		"		php affjet.php -s 12/02/2010 -e 15/06/2011 -n AffiliateWindow -t payment\n"	
 	);
 }
 

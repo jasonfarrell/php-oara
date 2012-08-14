@@ -9,21 +9,21 @@
  *
  */
 class Oara_Network_AffiliateFuture extends Oara_Network{
-    /**
-     * Export Transaction Parameters
-     * @var array
-     */
+	/**
+	 * Export Transaction Parameters
+	 * @var array
+	 */
 	private $_exportTransactionParameters = null;
-    /**
-     * Export Overview Parameters
-     * @var array
-     */
+	/**
+	 * Export Overview Parameters
+	 * @var array
+	 */
 	private $_exportOverviewParameters = null;
 
-    /**
-     * Client 
-     * @var unknown_type
-     */
+	/**
+	 * Client 
+	 * @var unknown_type
+	 */
 	private $_client = null;
 	/**
 	 * Constructor and Login
@@ -33,27 +33,27 @@ class Oara_Network_AffiliateFuture extends Oara_Network{
 	public function __construct($credentials)
 	{
 		$user = $credentials['user'];
-        $password = $credentials['password'];
+		$password = $credentials['password'];
 
 		$loginUrl = 'http://affiliates.affiliatefuture.com/login.aspx?';
-        
+
 		$valuesLogin = array(new Oara_Curl_Parameter('username', $user),
-                             new Oara_Curl_Parameter('password', $password),
-                             new Oara_Curl_Parameter('Submit', 'Login Now')
-                             );
+			new Oara_Curl_Parameter('password', $password),
+			new Oara_Curl_Parameter('Submit', 'Login Now')
+		);
 
 		$this->_client = new Oara_Curl_Access($loginUrl, $valuesLogin, $credentials);
-		
+
 		$urls = array();
-        $urls[] = new Oara_Curl_Request('http://affiliates.affiliatefuture.com/login.aspx?', $valuesLogin);
+		$urls[] = new Oara_Curl_Request('http://affiliates.affiliatefuture.com/login.aspx?', $valuesLogin);
 		$this->_client->get($urls);
-		
-        $this->_exportTransactionParameters = array(new Oara_Curl_Parameter('username', $user),
-                           							new Oara_Curl_Parameter('password', $password));  
-                                                   
-    	$this->_exportOverviewParameters = array(); 
-                                               
-		
+
+		$this->_exportTransactionParameters = array(new Oara_Curl_Parameter('username', $user),
+			new Oara_Curl_Parameter('password', $password));  
+
+		$this->_exportOverviewParameters = array(); 
+
+
 	}
 	/**
 	 * Check the connection
@@ -62,12 +62,12 @@ class Oara_Network_AffiliateFuture extends Oara_Network{
 		//If not login properly the construct launch an exception
 		$connection = true;
 		$urls = array();
-        $urls[] = new Oara_Curl_Request('http://affiliates.affiliatefuture.com/myaccount/invoices.aspx', array());
-       
-        $result = $this->_client->get($urls);
-        if (!preg_match("/Logout/", $result[0], $matches)){
-            $connection = false;
-        }
+		$urls[] = new Oara_Curl_Request('http://affiliates.affiliatefuture.com/myaccount/invoices.aspx', array());
+
+		$result = $this->_client->get($urls);
+		if (!preg_match("/Logout/", $result[0], $matches)){
+			$connection = false;
+		}
 		return $connection;
 	}
 	/**
@@ -76,15 +76,15 @@ class Oara_Network_AffiliateFuture extends Oara_Network{
 	 */
 	public function getMerchantList(){
 		$merchants = Array();
-        
-        $merchantExportList = self::readMerchants();
-        foreach ($merchantExportList as $merchant){
-            $obj = Array();
-	        $obj['cid'] = $merchant['cid'];
-	        $obj['name'] = $merchant['name'];
-	        $merchants[] = $obj;
-        }
-        return $merchants;
+
+		$merchantExportList = self::readMerchants();
+		foreach ($merchantExportList as $merchant){
+			$obj = Array();
+			$obj['cid'] = $merchant['cid'];
+			$obj['name'] = $merchant['name'];
+			$merchants[] = $obj;
+		}
+		return $merchants;
 	}
 
 	/**
@@ -92,26 +92,26 @@ class Oara_Network_AffiliateFuture extends Oara_Network{
 	 * @see library/Oara/Network/Oara_Network_Interface#getTransactionList($aMerchantIds, $dStartDate, $dEndDate, $sTransactionStatus)
 	 */
 	public function getTransactionList($merchantList = null, Zend_Date $dStartDate = null, Zend_Date $dEndDate = null, $merchantMap = null){
-		
+
 		$nowDate = new Zend_Date();
-		
+
 		$dStartDate = clone $dStartDate;
 		$dStartDate->setLocale('en');
-	    $dStartDate->setHour("00");
-        $dStartDate->setMinute("00");
-        $dStartDate->setSecond("00");
-        $dEndDate = clone $dEndDate;
-        $dEndDate->setLocale('en');
-        $dEndDate->setHour("23");
-        $dEndDate->setMinute("59");
-        $dEndDate->setSecond("59");
+		$dStartDate->setHour("00");
+		$dStartDate->setMinute("00");
+		$dStartDate->setSecond("00");
+		$dEndDate = clone $dEndDate;
+		$dEndDate->setLocale('en');
+		$dEndDate->setHour("23");
+		$dEndDate->setMinute("59");
+		$dEndDate->setSecond("59");
 		$valuesFromExport = Oara_Utilities::cloneArray($this->_exportTransactionParameters);
 		$valuesFromExport[] = new Oara_Curl_Parameter('startDate', $dStartDate->toString("dd-MMM-yyyy"));
 		$valuesFromExport[] = new Oara_Curl_Parameter('endDate', $dEndDate->toString("dd-MMM-yyyy"));
 		$transactions = Array();
 		$urls = array();
-        $urls[] = new Oara_Curl_Request('http://ws-external.afnt.co.uk/apiv1/AFFILIATES/affiliatefuture.asmx/GetTransactionListbyDate?', $valuesFromExport);
-        $urls[] = new Oara_Curl_Request('http://ws-external.afnt.co.uk/apiv1/AFFILIATES/affiliatefuture.asmx/GetCancelledTransactionListbyDate?', $valuesFromExport);
+		$urls[] = new Oara_Curl_Request('http://ws-external.afnt.co.uk/apiv1/AFFILIATES/affiliatefuture.asmx/GetTransactionListbyDate?', $valuesFromExport);
+		$urls[] = new Oara_Curl_Request('http://ws-external.afnt.co.uk/apiv1/AFFILIATES/affiliatefuture.asmx/GetCancelledTransactionListbyDate?', $valuesFromExport);
 		$exportReport = $this->_client->get($urls);
 		for ($i = 0 ; $i < count($urls); $i++){
 			$xml = self::loadXml($exportReport[$i]);
@@ -121,44 +121,44 @@ class Oara_Network_AffiliateFuture extends Oara_Network{
 			if(isset($xml->TransactionList)){
 				foreach ($xml->TransactionList as $transaction) {
 					$date = new Zend_Date(self::findAttribute($transaction, 'TransactionDate'),"yyyy-MM-ddTHH:mm:ss");
-					
+
 					if (in_array((int)self::findAttribute($transaction, 'ProgrammeID'),$merchantList)
-					    && $date->compare($dStartDate) >= 0 
-					    && $date->compare($dEndDate) <= 0) {
-					    	
-					   	$obj = Array();
-					    	
-					    $obj['merchantId'] = self::findAttribute($transaction, 'ProgrammeID');
-						$obj['date'] = $date->toString("yyyy-MM-dd HH:mm:ss");
-					    if (self::findAttribute($transaction, 'TrackingReference') != null){
-                			$obj['custom_id'] = self::findAttribute($transaction, 'TrackingReference');
-                		}
-                		$obj['unique_id'] = self::findAttribute($transaction, 'TransactionID');
-	
-						if ($i == 0){
-							if (Oara_Utilities::numberOfDaysBetweenTwoDates($date, $nowDate) > 5){
-								$obj['status'] = Oara_Utilities::STATUS_CONFIRMED;
-							} else {
-								$obj['status'] = Oara_Utilities::STATUS_PENDING;
+						&& $date->compare($dStartDate) >= 0 
+						&& $date->compare($dEndDate) <= 0) {
+
+							$obj = Array();
+
+							$obj['merchantId'] = self::findAttribute($transaction, 'ProgrammeID');
+							$obj['date'] = $date->toString("yyyy-MM-dd HH:mm:ss");
+							if (self::findAttribute($transaction, 'TrackingReference') != null){
+								$obj['custom_id'] = self::findAttribute($transaction, 'TrackingReference');
 							}
-						} else if ($i == 1){
-							$obj['status'] = Oara_Utilities::STATUS_DECLINED;
+							$obj['unique_id'] = self::findAttribute($transaction, 'TransactionID');
+
+							if ($i == 0){
+								if (Oara_Utilities::numberOfDaysBetweenTwoDates($date, $nowDate) > 5){
+									$obj['status'] = Oara_Utilities::STATUS_CONFIRMED;
+								} else {
+									$obj['status'] = Oara_Utilities::STATUS_PENDING;
+								}
+							} else if ($i == 1){
+								$obj['status'] = Oara_Utilities::STATUS_DECLINED;
+							}
+
+							$obj['amount'] = self::findAttribute($transaction, 'SaleValue');
+							$obj['commission'] = self::findAttribute($transaction, 'SaleCommission');
+							$leadCommission = self::findAttribute($transaction, 'LeadCommission');
+							if ( $leadCommission != 0 ){
+								$obj['commission'] += $leadCommission;
+							}
+
+
+							$transactions[] = $obj;
 						}
-						
-						$obj['amount'] = self::findAttribute($transaction, 'SaleValue');
-						$obj['commission'] = self::findAttribute($transaction, 'SaleCommission');
-						$leadCommission = self::findAttribute($transaction, 'LeadCommission');
-						if ( $leadCommission != 0 ){
-							$obj['commission'] += $leadCommission;
-						}
-						
-	
-						$transactions[] = $obj;
-					}
 				}
 			}
 		}
-		
+
 
 		return $transactions;
 	}
@@ -169,89 +169,89 @@ class Oara_Network_AffiliateFuture extends Oara_Network{
 	 */
 	public function getOverviewList($transactionList = null, $merchantList = null, Zend_Date $dStartDate = null, Zend_Date $dEndDate = null, $merchantMap = null){
 		$totalOverviews = Array();
-        $transactionArray = Oara_Utilities::transactionMapPerDay($transactionList);
-        foreach ($transactionArray as $merchantId => $merchantTransaction){
-        	foreach ($merchantTransaction as $date => $transactionList){
-        		
-        		$overview = Array();
-                                    
-                $overview['merchantId'] = $merchantId;
-                $overviewDate = new Zend_Date($date, "yyyy-MM-dd");
-                $overview['date'] = $overviewDate->toString("yyyy-MM-dd HH:mm:ss");
-                $overview['click_number'] = 0;
-                $overview['impression_number'] = 0;
-                $overview['transaction_number'] = 0;
-                $overview['transaction_confirmed_value'] = 0;
-                $overview['transaction_confirmed_commission']= 0;
-                $overview['transaction_pending_value']= 0;
-                $overview['transaction_pending_commission']= 0;
-                $overview['transaction_declined_value']= 0;
-                $overview['transaction_declined_commission']= 0;
-                $overview['transaction_paid_value']= 0;
-                $overview['transaction_paid_commission']= 0;
-                foreach ($transactionList as $transaction){
-                	$overview['transaction_number'] ++;
-                    if ($transaction['status'] == Oara_Utilities::STATUS_CONFIRMED){
-                    	$overview['transaction_confirmed_value'] += $transaction['amount'];
-                    	$overview['transaction_confirmed_commission'] += $transaction['commission'];
-                    } else if ($transaction['status'] == Oara_Utilities::STATUS_PENDING){
-                    	$overview['transaction_pending_value'] += $transaction['amount'];
-                    	$overview['transaction_pending_commission'] += $transaction['commission'];
-                    } else if ($transaction['status'] == Oara_Utilities::STATUS_DECLINED){
-                    	$overview['transaction_declined_value'] += $transaction['amount'];
-                    	$overview['transaction_declined_commission'] += $transaction['commission'];
-                	} else if ($transaction['status'] == Oara_Utilities::STATUS_PAID){
-                    	$overview['transaction_paid_value'] += $transaction['amount'];
-                    	$overview['transaction_paid_commission'] += $transaction['commission'];
-                	}
-        		}
-                $totalOverviews[] = $overview;
-        	}
-        }
-        
-        return $totalOverviews; 
+		$transactionArray = Oara_Utilities::transactionMapPerDay($transactionList);
+		foreach ($transactionArray as $merchantId => $merchantTransaction){
+			foreach ($merchantTransaction as $date => $transactionList){
+
+				$overview = Array();
+
+				$overview['merchantId'] = $merchantId;
+				$overviewDate = new Zend_Date($date, "yyyy-MM-dd");
+				$overview['date'] = $overviewDate->toString("yyyy-MM-dd HH:mm:ss");
+				$overview['click_number'] = 0;
+				$overview['impression_number'] = 0;
+				$overview['transaction_number'] = 0;
+				$overview['transaction_confirmed_value'] = 0;
+				$overview['transaction_confirmed_commission']= 0;
+				$overview['transaction_pending_value']= 0;
+				$overview['transaction_pending_commission']= 0;
+				$overview['transaction_declined_value']= 0;
+				$overview['transaction_declined_commission']= 0;
+				$overview['transaction_paid_value']= 0;
+				$overview['transaction_paid_commission']= 0;
+				foreach ($transactionList as $transaction){
+					$overview['transaction_number'] ++;
+					if ($transaction['status'] == Oara_Utilities::STATUS_CONFIRMED){
+						$overview['transaction_confirmed_value'] += $transaction['amount'];
+						$overview['transaction_confirmed_commission'] += $transaction['commission'];
+					} else if ($transaction['status'] == Oara_Utilities::STATUS_PENDING){
+						$overview['transaction_pending_value'] += $transaction['amount'];
+						$overview['transaction_pending_commission'] += $transaction['commission'];
+					} else if ($transaction['status'] == Oara_Utilities::STATUS_DECLINED){
+						$overview['transaction_declined_value'] += $transaction['amount'];
+						$overview['transaction_declined_commission'] += $transaction['commission'];
+					} else if ($transaction['status'] == Oara_Utilities::STATUS_PAID){
+						$overview['transaction_paid_value'] += $transaction['amount'];
+						$overview['transaction_paid_commission'] += $transaction['commission'];
+					}
+				}
+				$totalOverviews[] = $overview;
+			}
+		}
+
+		return $totalOverviews; 
 	}
-	
+
 	/**
-     * Read the merchants in the table
-     * @return array
-     */
-    public function readMerchants(){
-    	$merchantList = array();
-    	$urls = array();
-        $urls[] = new Oara_Curl_Request('http://affiliates.affiliatefuture.com/myprogrammes/default.aspx', array());
-        $exportReport = $this->_client->get($urls);
-        
-        /*** load the html into the object ***/
-	    $doc = new DOMDocument();
-	    libxml_use_internal_errors(true);
-	    $doc->validateOnParse = true;
-	    $doc->loadHTML($exportReport[0]);
-	    $tableList = $doc->getElementsByTagName('table');
-	    
-	    $merchantTable = $tableList->item(16)->childNodes;
-    	for ($i = 1; $i < $merchantTable->length -1; $i++){
-    		$merchant = array();
-    		
-    		$registerLine = $merchantTable->item($i);
-    		$register = $registerLine->childNodes;
-    		$attributeName = trim($register->item(0)->nodeValue);
-    		$attributeUrl = $register->item(1)->childNodes->item(0)->childNodes->item(1)->getAttribute('href');
+	 * Read the merchants in the table
+	 * @return array
+	 */
+	public function readMerchants(){
+		$merchantList = array();
+		$urls = array();
+		$urls[] = new Oara_Curl_Request('http://affiliates.affiliatefuture.com/myprogrammes/default.aspx', array());
+		$exportReport = $this->_client->get($urls);
+
+		/*** load the html into the object ***/
+		$doc = new DOMDocument();
+		libxml_use_internal_errors(true);
+		$doc->validateOnParse = true;
+		$doc->loadHTML($exportReport[0]);
+		$tableList = $doc->getElementsByTagName('table');
+
+		$merchantTable = $tableList->item(16)->childNodes;
+		for ($i = 1; $i < $merchantTable->length -1; $i++){
+			$merchant = array();
+
+			$registerLine = $merchantTable->item($i);
+			$register = $registerLine->childNodes;
+			$attributeName = trim($register->item(0)->nodeValue);
+			$attributeUrl = $register->item(1)->childNodes->item(0)->childNodes->item(1)->getAttribute('href');
 			$merchant['name'] = trim($attributeName);
-			
-	    	$parseUrl = parse_url($attributeUrl);
-	        $parameters = explode('&', $parseUrl['query']);
-	        $oaraCurlParameters = array();
-	        foreach($parameters as $parameter){
-	        	$parameterValue = explode('=', $parameter);
-	            if ($parameterValue[0] == 'id'){
-	            	$merchant['cid'] = $parameterValue[1];
-	            }
-	        }
-	        $merchantList[] = $merchant;
-    	}
-        return $merchantList;
-    }
+
+			$parseUrl = parse_url($attributeUrl);
+			$parameters = explode('&', $parseUrl['query']);
+			$oaraCurlParameters = array();
+			foreach($parameters as $parameter){
+				$parameterValue = explode('=', $parameter);
+				if ($parameterValue[0] == 'id'){
+					$merchant['cid'] = $parameterValue[1];
+				}
+			}
+			$merchantList[] = $merchant;
+		}
+		return $merchantList;
+	}
 
 
 	/**
@@ -276,7 +276,7 @@ class Oara_Network_AffiliateFuture extends Oara_Network{
 		if($xml == false){
 			throw new Exception('Problems in the XML');
 		}
-		*/
+		 */
 		return $xml;
 	}
 	/**
@@ -284,23 +284,23 @@ class Oara_Network_AffiliateFuture extends Oara_Network{
 	 * @see Oara/Network/Oara_Network_Base#getPaymentHistory()
 	 */
 	public function getPaymentHistory(){
-    	$paymentHistory = array();
-    	$filter = new Zend_Filter_LocalizedToNormalized(array('precision' => 2));
-    	$urls = array();
-        $urls[] = new Oara_Curl_Request('http://affiliates.affiliatefuture.com/myaccount/invoices.aspx', array());
-        $exportReport = $this->_client->get($urls);
-    	
+		$paymentHistory = array();
+		$filter = new Zend_Filter_LocalizedToNormalized(array('precision' => 2));
+		$urls = array();
+		$urls[] = new Oara_Curl_Request('http://affiliates.affiliatefuture.com/myaccount/invoices.aspx', array());
+		$exportReport = $this->_client->get($urls);
+
 		/*** load the html into the object ***/
-	    $doc = new DOMDocument();
-	    libxml_use_internal_errors(true);
-	    $doc->validateOnParse = true;
-	    $doc->loadHTML($exportReport[0]);
-	    $tableList = $doc->getElementsByTagName('table');
-	    $registerTable = $tableList->item(12);
-    	if ($registerTable == null){
+		$doc = new DOMDocument();
+		libxml_use_internal_errors(true);
+		$doc->validateOnParse = true;
+		$doc->loadHTML($exportReport[0]);
+		$tableList = $doc->getElementsByTagName('table');
+		$registerTable = $tableList->item(12);
+		if ($registerTable == null){
 			throw new Exception ('Fail getting the payment History');
 		}
-		
+
 		$registerLines = $registerTable->childNodes;
 		for ($i = 1;$i < $registerLines->length ;$i++) {
 			$registerLine = $registerLines->item($i)->childNodes;
@@ -313,8 +313,8 @@ class Oara_Network_AffiliateFuture extends Oara_Network{
 			$obj['method'] = 'BACS';
 			$paymentHistory[] = $obj;
 		}
-    	
-    	return $paymentHistory;
-    }
-	
+
+		return $paymentHistory;
+	}
+
 }

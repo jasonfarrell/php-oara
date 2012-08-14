@@ -34,16 +34,16 @@ class Oara_Network_AutoEurope extends Oara_Network{
 		$loginUrl = 'https://www.auto-europe.co.uk/afftools/index.cfm';
 
 		$valuesLogin = array(new Oara_Curl_Parameter('action', 'runreport'),
-		new Oara_Curl_Parameter('alldates', 'all'),
-		new Oara_Curl_Parameter('membername', $user),
-		new Oara_Curl_Parameter('affpass', $password),
-		new Oara_Curl_Parameter('Post', 'Login')
+			new Oara_Curl_Parameter('alldates', 'all'),
+			new Oara_Curl_Parameter('membername', $user),
+			new Oara_Curl_Parameter('affpass', $password),
+			new Oara_Curl_Parameter('Post', 'Login')
 		);
 
 		$this->_client = new Oara_Curl_Access($loginUrl, $valuesLogin, $credentials);
 
 		$this->_exportTransactionParameters = array(new Oara_Curl_Parameter('pDB', 'UK'),
-		new Oara_Curl_Parameter('content', 'PDF')
+			new Oara_Curl_Parameter('content', 'PDF')
 		);
 	}
 	/**
@@ -182,12 +182,12 @@ class Oara_Network_AutoEurope extends Oara_Network{
 		fwrite($fh, $exportReport[0]);
 		fclose($fh);
 		//parsing the pdf
-			
+
 		$pipes = null;
 		$descriptorspec = array(
-		0 => array('pipe', 'r'),
-		1 => array('pipe', 'w'),
-		2 => array('pipe', 'w')
+			0 => array('pipe', 'r'),
+			1 => array('pipe', 'w'),
+			2 => array('pipe', 'w')
 		);
 		$pdfReader = proc_open("pdftohtml -xml -stdout ".$dir.$exportReportUrl, $descriptorspec, $pipes, null, null);
 		if (is_resource($pdfReader)) {
@@ -221,7 +221,7 @@ class Oara_Network_AutoEurope extends Oara_Network{
 		} else {
 			throw new Exception("No Header Found");
 		}
-		
+
 		if ($top == null){
 			throw new Exception("No Top Found");
 		}
@@ -246,19 +246,19 @@ class Oara_Network_AutoEurope extends Oara_Network{
 				$xmlHeaderCommissionValue->left = $xmlHeader->left;
 				$xmlHeaderCommissionValue->width = 100;
 				$xmlHeaderCommissionValue->name = (String)"commissionValue";
-				
+
 				$xmlHeaderCommission = new stdClass();
 				$xmlHeaderCommission->top = $xmlHeader->top;
 				$xmlHeaderCommission->left = $xmlHeader->left + $xmlHeaderCommissionValue->width;
 				$xmlHeaderCommission->width = 150;
 				$xmlHeaderCommission->name = (String)"commission";
-				
+
 				$headerList[] = $xmlHeaderCommissionValue;
 				$headerList[] = $xmlHeaderCommission;
 			}
-			
+
 		}
-		
+
 		$list = $xml->xpath("page/text[@font=2]");
 		$rowList = array();
 		foreach ($list as $row){
@@ -268,17 +268,17 @@ class Oara_Network_AutoEurope extends Oara_Network{
 				$rowList[] = $top;
 			}
 		}
-		
+
 		$transationList = array();
 		foreach ($rowList as $top){
 			$transaction = array();
 			$list = $xml->xpath("page/text[@top=$top and @font=2]");
-			
+
 			foreach ($list as $value){
 				$attributes = $value->attributes();
 				$fromLeft = (int)$attributes['left'];
 				$toLeft = (int)($attributes['left'] + $attributes['width']);
-				
+
 				$i = 0;
 				$enc = false;
 				$number = count($headerList);
@@ -286,7 +286,7 @@ class Oara_Network_AutoEurope extends Oara_Network{
 					$header = $headerList[$i];
 					$headerFromLeft = $header->left;
 					$headerToLeft = $header->left + $header->width;
-					
+
 					$valueInHeader = $headerFromLeft<=$fromLeft && $toLeft<=$headerToLeft;
 					$headerInValue = $fromLeft<=$headerFromLeft && $headerToLeft<=$toLeft;
 					if ($valueInHeader || $headerInValue){
@@ -298,7 +298,7 @@ class Oara_Network_AutoEurope extends Oara_Network{
 			}
 			$transationList[] = $transaction;
 		}
-		
+
 		return $transationList;
 	}
 

@@ -5,7 +5,6 @@ require realpath(dirname(__FILE__)) . '/../settings.php';
 $config = Zend_Registry::getInstance()->get('credentialsIni');
 $credentials = $config->omg->toArray();
 
-
 //Path for the cookie located inside the Oara/data/curl folder
 $credentials["cookiesDir"] = "example";
 $credentials["cookiesSubDir"] = "Omg";
