@@ -29,7 +29,25 @@ class Oara_Network_Amazon extends Oara_Network{
 	 * @var array
 	 */
 	private $_exportPaymentParameters = null;
-
+	
+	/**
+	 * Transaction column headings
+	 * @var array
+	 */
+	static private $_transaction_column_headers = array(
+		'Product Line' => 0,
+		'Item Name' => 1,
+		'ASIN' => 2,
+		'Seller' => 3,
+		'Tracking ID' => 4,
+		'Date Shipped' => 5,
+		'Price' => 6,
+		'Advertising-Fee Rate' => 7,
+		'Items Shipped' => 8,
+		'Revenue' => 9,
+		'Advertising Fees' => 10,
+	);
+	
 	private $_idBox = null;
 
 	private $_credentials = null;
@@ -263,19 +281,29 @@ class Oara_Network_Amazon extends Oara_Network{
 			$transactionExportArray = str_getcsv(str_replace("\"", "", $exportData[$i]),"\t");
 			$transaction = Array();
 			$transaction['merchantId'] = 1;
-			if (!isset($transactionExportArray[5])){
+			if (!isset(
+				$transactionExportArray[self::$_transaction_column_headers['Date Shipped']]
+			)){
 				throw new Exception("Request failed");
 			}
-			$transactionDate = new Zend_Date($transactionExportArray[5], 'MMMM d,yyyy', 'en');
+			$transactionDate = new Zend_Date(
+				$transactionExportArray[self::$_transaction_column_headers['Date Shipped']],
+				'MMMM d,yyyy',
+				'en'
+			);
 			$transaction['date'] = $transactionDate->toString("yyyy-MM-dd HH:mm:ss");
 			unset($transactionDate);
-			if ($transactionExportArray[4] != null){
-				$transaction['custom_id'] = $transactionExportArray[4];
+			if ($transactionExportArray[self::$_transaction_column_headers['Tracking ID']] != null){
+				$transaction['custom_id'] = $transactionExportArray[self::$_transaction_column_headers['Tracking ID']];
 			}
 
 			$transaction['status'] = Oara_Utilities::STATUS_CONFIRMED;
-			$transaction['amount'] = Oara_Utilities::parseDouble($transactionExportArray[9]);
-			$transaction['commission'] = Oara_Utilities::parseDouble($transactionExportArray[10]);
+			$transaction['amount'] = Oara_Utilities::parseDouble(
+				$transactionExportArray[self::$_transaction_column_headers['Revenue']]
+			);
+			$transaction['commission'] = Oara_Utilities::parseDouble(
+				$transactionExportArray[self::$_transaction_column_headers['Advertising Fees']]
+			);
 			$totalTransactions[] = $transaction;
 		}
 		return $totalTransactions;
