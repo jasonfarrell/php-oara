@@ -222,8 +222,10 @@ class Oara_Network_Amazon extends Oara_Network{
 	    	$dateArraySize = sizeof($dateArray);
 	           
 	    	for ($j = 0; $j < $dateArraySize; $j++){
-				echo "day ".$dateArray[$j]->toString("d")."\n";
-				echo round(memory_get_usage(true)/1048576,2)." megabytes \n";
+				if ( true === $this->_debug ) {
+					echo "day ".$dateArray[$j]->toString("d")."\n";
+					echo round(memory_get_usage(true)/1048576,2)." megabytes \n";
+				}
 				$try = 0;
 				$done = false;
 				while (!$done && $try < 5){
@@ -300,7 +302,9 @@ class Oara_Network_Amazon extends Oara_Network{
 						$done = true;
 					} catch (Exception $e){
 						$try++;
-						echo "try again $try\n\n";
+						if ( true === $this->_debug ) {
+							echo "try again $try\n\n";
+						}
 					}
 				}
 				if ($try == 5){
