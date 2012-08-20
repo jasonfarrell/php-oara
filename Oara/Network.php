@@ -11,6 +11,12 @@
 class Oara_Network
 {
 	/**
+	 * Display degbuging echo statements
+	 * @var boolean
+	 */
+	protected $_debug = true;
+
+	/**
 	 * 
 	 * It checks if we are succesfully connected to the network
 	 */
@@ -65,5 +71,19 @@ class Oara_Network
 	public function paymentTransactions($paymentId, $merchantList, $startDate){
 		$result = array();
 		return $result;
+	}
+	/**
+	 *
+	 * Set the debug mode
+	 * @param boolean $enable_debugging
+	 */
+	public function setDebug($enable_debugging) {
+		if ( !is_bool($enable) ) {
+			throw new InvalidArgumentException(
+				'Oara_Network::setDebug only accepts boolean values.  '.
+				'Input was:'. var_export($enable_debugging, true)
+			);
+		}
+		$this->_debug = $enable_debugging;
 	}
 }
