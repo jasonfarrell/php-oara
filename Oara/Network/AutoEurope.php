@@ -26,8 +26,10 @@ class Oara_Network_AutoEurope extends Oara_Network{
 	 * @param $au
 	 * @return Oara_Network_AutoEurope_Export
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
 
 		$user = $credentials['user'];
 		$password = $credentials['password'];

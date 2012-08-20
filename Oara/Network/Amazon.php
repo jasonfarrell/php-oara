@@ -47,8 +47,11 @@ class Oara_Network_Amazon extends Oara_Network{
 	 * @param $credentials
 	 * @return Oara_Network_Daisycon
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
+
 		$this->_credentials = $credentials;
 		
 		self::logIn();

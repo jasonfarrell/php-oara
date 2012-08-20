@@ -55,8 +55,11 @@ class Oara_Network_AffiliateWindow extends Oara_Network{
      * @param $affiliateWindow
      * @return Oara_Network_Aw_Api
      */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
+
 		ini_set('default_socket_timeout','120');
         $user = $credentials['user'];
         $password = $credentials['apiPassword'];

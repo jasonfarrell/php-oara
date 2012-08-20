@@ -47,8 +47,11 @@ class Oara_Network_PaidOnResults extends Oara_Network{
 	 * @param $por
 	 * @return Oara_Network_Por_Api
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
+
 		$user = $credentials['user'];
         $password = $credentials['password'];
         $this->_apiPassword = $credentials['apiPassword'];

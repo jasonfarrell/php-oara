@@ -30,8 +30,11 @@ class Oara_Network_AffiliateFuture extends Oara_Network{
 	 * @param $af
 	 * @return Oara_Network_Af_Export
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
+
 		$user = $credentials['user'];
         $password = $credentials['password'];
 

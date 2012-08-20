@@ -17,6 +17,14 @@ class Oara_Network
 	protected $_debug = true;
 
 	/**
+	 * Constructor and Login
+	 */
+	public function __construct($credentials, $options = array()){
+		if ( array_key_exists('debug', $options) ) {
+			$this->setDebug($options['debug']);
+		}
+	}
+	/**
 	 * 
 	 * It checks if we are succesfully connected to the network
 	 */

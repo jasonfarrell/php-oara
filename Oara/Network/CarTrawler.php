@@ -26,8 +26,10 @@ class Oara_Network_CarTrawler extends Oara_Network{
 	 * @param $cartrawler
 	 * @return Oara_Network_Ct_Export
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
 		
 		$user = $credentials['user'];
         $password = $credentials['password'];

@@ -71,8 +71,11 @@ class Oara_Network_AffiliNet extends Oara_Network{
      * @param $affilinet
      * @return Oara_Network_An_Api
      */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
+
         $this->_user = $credentials['user'];
         $this->_password = $credentials['password'];
         

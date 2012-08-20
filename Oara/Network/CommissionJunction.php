@@ -58,8 +58,10 @@ class Oara_Network_CommissionJunction extends Oara_Network{
 	 * @param $cj
 	 * @return Oara_Network_Cj_Export
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
 		 
 		$user = $credentials['user'];
 		$password = $credentials['password'];

@@ -40,8 +40,10 @@ class Oara_Network_SilverTap extends Oara_Network{
 	 * @param $silvertap
 	 * @return Oara_Network_St_Export
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
 
 		$user = $credentials['user'];
         $password = $credentials['password'];
