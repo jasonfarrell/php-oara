@@ -28,8 +28,10 @@ class Oara_Network_Demo extends Oara_Network{
 	 * @param $cartrawler
 	 * @return Oara_Network_Demo_Export
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
 
 	}
 	/**

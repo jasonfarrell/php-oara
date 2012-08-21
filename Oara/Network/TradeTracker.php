@@ -18,8 +18,11 @@ class Oara_Network_TradeTracker extends Oara_Network{
 	 * @param $affiliateWindow
 	 * @return Oara_Network_Aw_Api
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
+
 		$user = $credentials['user'];
 		$password = $credentials['password'];
 

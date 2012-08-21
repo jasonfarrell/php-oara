@@ -19,8 +19,10 @@ class Oara_Network_HolidayAutos extends Oara_Network{
 	 * @param $credentials
 	 * @return Oara_Network_HolidayAutos
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
 
 		$this->_host = $credentials['host'];
 		$this->_schema = $credentials['schema'];

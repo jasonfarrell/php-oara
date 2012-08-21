@@ -29,8 +29,11 @@ class Oara_Network_M4n extends Oara_Network{
 	 * @param $credentials
 	 * @return Oara_Network_Daisycon
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
+
 		$user = $credentials['user'];
 		$password = $credentials['password'];
 
