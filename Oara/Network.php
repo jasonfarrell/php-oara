@@ -86,7 +86,7 @@ class Oara_Network
 	 * @param boolean $enable_debugging
 	 */
 	public function setDebug($enable_debugging) {
-		if ( !is_bool($enable) ) {
+		if ( !is_bool($enable_debugging) ) {
 			throw new InvalidArgumentException(
 				'Oara_Network::setDebug only accepts boolean values.  '.
 				'Input was:'. var_export($enable_debugging, true)
