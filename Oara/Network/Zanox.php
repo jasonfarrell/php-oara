@@ -24,8 +24,10 @@ class Oara_Network_Zanox extends Oara_Network{
      * @param $affiliateWindow
      * @return Oara_Network_Zn_Api
      */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
 		
 		$api = Oara_Network_Zanox_Zapi_ApiClient::factory(PROTOCOL_SOAP, VERSION_2011_03_01);
  		

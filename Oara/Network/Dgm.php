@@ -66,8 +66,11 @@ class Oara_Network_Dgm extends Oara_Network{
      * @param $dgm
      * @return Oara_Network_Dgm_Api
      */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
+
         //Reading the different parameters.
         $user = $credentials['user'];
         $password = $credentials['password'];

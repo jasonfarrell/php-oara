@@ -23,8 +23,11 @@ class Oara_Network_AffJetNet extends Oara_Network{
 	 * Constructor and Login
 	 * @param $credentials
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
+
 		$this->_user = $credentials['user'];
 		$this->_password = $credentials['password'];
 		$this->_partnerId = $credentials['partnerId'];

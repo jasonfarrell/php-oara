@@ -17,6 +17,14 @@ class Oara_Network
 	protected $_debug = true;
 
 	/**
+	 * Constructor and Login
+	 */
+	public function __construct($credentials, $options = array()){
+		if ( array_key_exists('debug', $options) ) {
+			$this->setDebug($options['debug']);
+		}
+	}
+	/**
 	 * 
 	 * It checks if we are succesfully connected to the network
 	 */
@@ -78,7 +86,7 @@ class Oara_Network
 	 * @param boolean $enable_debugging
 	 */
 	public function setDebug($enable_debugging) {
-		if ( !is_bool($enable) ) {
+		if ( !is_bool($enable_debugging) ) {
 			throw new InvalidArgumentException(
 				'Oara_Network::setDebug only accepts boolean values.  '.
 				'Input was:'. var_export($enable_debugging, true)

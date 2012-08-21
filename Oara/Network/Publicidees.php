@@ -19,8 +19,10 @@ class Oara_Network_Publicidees extends Oara_Network{
      * @param $credentials
      * @return Oara_Network_Effiliation
      */
-    public function __construct($credentials)
+    public function __construct($credentials, $options = array())
     {
+
+		parent::__construct($credentials, $options);
         
         $user = $credentials['user'];
 		$password = $credentials['password'];

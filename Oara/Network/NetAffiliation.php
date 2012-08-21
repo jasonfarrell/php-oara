@@ -30,8 +30,10 @@ class Oara_Network_NetAffiliation extends Oara_Network{
      * @param $credentials
      * @return null
      */
-    public function __construct($credentials)
+    public function __construct($credentials, $options = array())
     {
+
+		parent::__construct($credentials, $options);
 
         $this->_credentials = $credentials;
         

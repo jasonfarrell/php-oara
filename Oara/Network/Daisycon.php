@@ -41,8 +41,11 @@ class Oara_Network_Daisycon extends Oara_Network{
 	 * @param $credentials
 	 * @return Oara_Network_Daisycon
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
+
 		$this->_credentials = $credentials;
 		$user = $credentials['user'];
         $password = $credentials['password'];

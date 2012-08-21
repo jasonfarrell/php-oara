@@ -45,8 +45,10 @@ class Oara_Network_TradeDoubler extends Oara_Network{
 	 * @param $tradeDoubler
 	 * @return Oara_Network_Td_Export
 	 */
-	public function __construct($credentials)
+	public function __construct($credentials, $options = array())
 	{
+
+		parent::__construct($credentials, $options);
 
 		$this->_credentials = $credentials;
 
